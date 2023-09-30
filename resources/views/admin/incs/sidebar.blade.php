@@ -22,10 +22,39 @@
             <li class="sidebar-title">Menu</li>
 
             <li
-                class="sidebar-item active ">
-                <a href="index.html" class='sidebar-link'>
+                class="sidebar-item {{ (request()->is('dashboard') or request()->is('dashboard/*'))  ? 'active' : '' }} ">
+                <a href="/dashboard" class='sidebar-link'>
                     <i class="bi bi-grid-fill"></i>
-                    <span>Dashboard</span>
+                    <span>Главная</span>
+                </a>
+            </li>
+            <li
+                class="sidebar-item {{ (request()->is('good') or request()->is('good/*')) ? 'active' : '' }}">
+                <a href="{{ route('good.index') }}" class='sidebar-link'>
+                    <i class="bi bi-grid-fill"></i>
+                    <span>Товары</span>
+                </a>
+            </li>
+            <li
+                class="sidebar-item {{ (request()->is('brands') or request()->is('brands/*')) ? 'active' : '' }}">
+                <a href="{{ route('brands.index') }}" class='sidebar-link'>
+                    <i class="bi bi-grid-fill"></i>
+                    <span>Бренды</span>
+                </a>
+            </li>
+            <li
+                class="sidebar-item {{ (request()->is('category') or request()->is('category/*')) ? 'active' : '' }}">
+                <a href="{{ route('category.index') }}" class='sidebar-link'>
+                    <i class="bi bi-grid-fill"></i>
+                    <span>Категории</span>
+                </a>
+            </li>
+
+            <li
+                class="sidebar-item {{ (request()->is('images') or request()->is('images/*')) ? 'active' : '' }}">
+                <a href="{{ route('image.index') }}" class='sidebar-link'>
+                    <i class="bi bi-grid-fill"></i>
+                    <span>Картинки</span>
                 </a>
             </li>
 

@@ -27,12 +27,9 @@
             </a>
         </header>
 
-        <div class="page-heading">
-
-        </div>
         <div class="page-content">
             <section class="row">
-
+                @yield('content')
             </section>
         </div>
 
