@@ -28,7 +28,7 @@ class ImageController extends Controller
     {
         $data = Validator::make($request->all(), [
             'good_id' => 'required',
-            'image' => 'required'
+            'image' => 'required|file'
         ]);
 
         $this->imageService->store($data->validated());

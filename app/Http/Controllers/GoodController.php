@@ -8,7 +8,6 @@ use App\Models\Brand;
 use App\Models\Category;
 use App\Models\Good;
 use App\Services\GoodService;
-use Illuminate\Http\Request;
 
 class GoodController extends Controller
 {
