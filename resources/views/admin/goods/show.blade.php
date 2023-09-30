@@ -55,7 +55,7 @@
     </div>
     @if(isset($good->images))
         @foreach($good->images as $image)
-            <img src="{{ Storage::url($image->image) }}" class="w-25">
+            <img src="{{ Storage::url($image?->image) }}" class="w-25">
         @endforeach
     @endif
 @endsection

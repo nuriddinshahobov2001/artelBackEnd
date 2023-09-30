@@ -27,7 +27,7 @@
                         <td>{{ $loop->iteration }}</td>
                         <td>{{ $good->name }}</td>
                         <td>{{ $good->description }}</td>
-                        <td>{{ $good->brand->name }}</td>
+                        <td>{{ $good->brand?->name }}</td>
                         <td>{{ $good->price }}</td>
                         <td>
                             <a href="{{ route('good.edit', $good->id) }}" class="btn btn-primary">Изменить</a>
