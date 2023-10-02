@@ -3,10 +3,12 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Mail\SendCodeMail;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Validator;
 
 class AuthController extends Controller
@@ -87,6 +89,80 @@ class AuthController extends Controller
                 'status' => false,
                 'message' => $th->getMessage()
             ], 500);
+        }
+    }
+
+    public function forget_password(Request $request)
+    {
+        $data = Validator::make($request->all(), [
+           'email' => 'required|email'
+        ]);
+        $email = $data->validated();
+
+        $user = User::where('email', $email['email'])->first();
+
+        if ($user) {
+            $code =mt_rand(0, 9999);
+            $user->code = $code;
+            $user->save();
+
+            Mail::to('khusravmuhammadi.73@gmail.com')->send(new SendCodeMail($user->code));
+
+            return response()->json([
+                'message' => true,
+                'info' => 'Проверьте свой e-mail'
+            ]);
+        } else {
+            return response()->json([
+                'message' => false,
+                'info' => 'Неверный e-mail'
+            ]);
+        }
+    }
+
+    public function check_code(Request $request)
+    {
+        $data = Validator::make($request->all(), [
+            'code' => 'required|integer'
+        ]);
+        $code = $data->validated();
+
+        $user = User::where('code', $code['code'])->first();
+
+        if ($user) {
+            return response()->json([
+                'message' => true
+            ]);
+        } else {
+            return response()->json([
+                'message' => false,
+            ]);
+        }
+    }
+
+    public function change_password(Request $request)
+    {
+        $data = Validator::make($request->all(), [
+            'email' => 'required|email',
+            'password' => 'string'
+        ]);
+
+        $password = $data->validated();
+
+        $user = User::where('email', $password['email'])->first();
+        if ($user) {
+            $user->password = Hash::make($password['password']);
+            $user->save();
+
+            return response()->json([
+                'message' => true,
+                'info' => 'Пароль успешно изменен!'
+            ]);
+        } else {
+            return response()->json([
+                'message' => false,
+                'info' => 'Неверный e-mail'
+            ]);
         }
     }
 
