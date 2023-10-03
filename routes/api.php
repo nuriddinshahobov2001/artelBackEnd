@@ -28,6 +28,8 @@ Route::middleware('auth:sanctum')->group(function () {
 
    Route::get('brand', [\App\Http\Controllers\Api\BrandController::class, 'index']);
    Route::get('brand/{slug}', [\App\Http\Controllers\Api\BrandController::class, 'getBySlug']);
+
+   Route::get('getRandomGoods', [\App\Http\Controllers\Api\GoodController::class, 'getRandomGoods']);
 });
 
 Route::post('register', [\App\Http\Controllers\Api\AuthController::class, 'register']);

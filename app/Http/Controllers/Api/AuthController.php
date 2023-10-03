@@ -102,11 +102,11 @@ class AuthController extends Controller
         $user = User::where('email', $email['email'])->first();
 
         if ($user) {
-            $code =mt_rand(0, 9999);
+            $code =mt_rand(1000, 9999);
             $user->code = $code;
             $user->save();
 
-            Mail::to('khusravmuhammadi.73@gmail.com')->send(new SendCodeMail($user->code));
+            Mail::to('rustam.radzabov8410@gmail.com')->send(new SendCodeMail($user->code));
 
             return response()->json([
                 'message' => true,

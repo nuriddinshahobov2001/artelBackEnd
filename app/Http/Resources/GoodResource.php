@@ -20,8 +20,6 @@ class GoodResource extends JsonResource
             'slug' => $this->slug,
             'description' => $this->description,
             'full_description' => $this->full_description,
-            'category_id' => $this->category_id,
-            'brand_id' => $this->brand_id,
             'price' => $this->price,
             'sale' => $this->sale,
             'count' => $this->count
