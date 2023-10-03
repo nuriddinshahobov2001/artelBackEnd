@@ -123,11 +123,15 @@ class AuthController extends Controller
     public function check_code(Request $request)
     {
         $data = Validator::make($request->all(), [
-            'code' => 'required|integer'
+            'code' => 'required|integer',
+            'email' => 'required|email'
         ]);
         $code = $data->validated();
 
-        $user = User::where('code', $code['code'])->first();
+        $user = User::where([
+            ['code', $code['code']],
+            ['email', $code['email']]
+        ])->first();
 
         if ($user) {
             return response()->json([
