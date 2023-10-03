@@ -35,4 +35,3 @@ Route::post('login', [\App\Http\Controllers\Api\AuthController::class, 'login'])
 Route::post('forget_password', [App\Http\Controllers\Api\AuthController::class, 'forget_password']);
 Route::post('check_code', [App\Http\Controllers\Api\AuthController::class, 'check_code']);
 Route::post('change_password', [App\Http\Controllers\Api\AuthController::class, 'change_password']);
-
