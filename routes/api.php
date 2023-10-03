@@ -30,6 +30,7 @@ Route::middleware('auth:sanctum')->group(function () {
    Route::get('brand/{slug}', [\App\Http\Controllers\Api\BrandController::class, 'getBySlug']);
 
    Route::get('getRandomGoods', [\App\Http\Controllers\Api\GoodController::class, 'getRandomGoods']);
+   Route::get('getBySlug/{slug}', [\App\Http\Controllers\Api\GoodController::class, 'getBySlug']);
 });
 
 Route::post('register', [\App\Http\Controllers\Api\AuthController::class, 'register']);

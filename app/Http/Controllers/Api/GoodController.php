@@ -24,4 +24,14 @@ class GoodController extends Controller
             'goods' => GoodResource::collection($goods)
         ]);
     }
+
+    public function getBySlug($slug)
+    {
+        $good = Good::where('slug', $slug)->first();
+
+        return response()->json([
+           'message' => true,
+           'good' => GoodResource::make($good)
+        ]);
+    }
 }
