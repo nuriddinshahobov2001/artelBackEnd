@@ -11,7 +11,7 @@
         <a href="{{ route('good.create') }}" class="btn btn-outline-primary">
             Добавить
         </a>
-        <div class="col-9">
+        <div class="col-10">
             <table class="table">
                 <thead>
                 <th>#</th>

@@ -1,8 +1,11 @@
 @extends('layouts.app')
 
 @section('content')
-    <a href="{{ route('good.index') }}" class="btn btn-outline-danger mb-2 col-1">
+    <a href="{{ route('good.index') }}" class="btn btn-outline-danger mb-2 col-1" style="margin-right: 10px">
         Назад
+    </a>
+    <a href="{{ route('good.edit', $good->id) }}" class="btn btn-outline-primary mb-2 col-2">
+        Изменить
     </a>
     <div class="card">
         <div class="card-body">
@@ -45,10 +48,6 @@
                 <div class="col-7">
                     <label for="full_description">Полное описание</label>
                     <textarea class="form-control" cols="30" rows="3" disabled>{{ $good->full_description }}</textarea>
-                </div>
-
-                <div class="d-flex justify-content-end mt-3">
-                    <button class="btn btn-primary">Обновить</button>
                 </div>
             </div>
         </div>
