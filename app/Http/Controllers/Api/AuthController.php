@@ -106,7 +106,7 @@ class AuthController extends Controller
             $user->code = $code;
             $user->save();
 
-            Mail::to('rustam.radzabov8410@gmail.com')->send(new SendCodeMail($user->code));
+            Mail::to($user->email)->send(new SendCodeMail($user->code));
 
             return response()->json([
                 'message' => true,
@@ -160,7 +160,7 @@ class AuthController extends Controller
 
             return response()->json([
                 'message' => true,
-                'info' => 'Пароль успешно изменен!'
+                'info' => 'Пароль успешно изменен!',
             ]);
         } else {
             return response()->json([
@@ -169,5 +169,24 @@ class AuthController extends Controller
             ]);
         }
     }
+
+    public function logout(Request $request)
+    {
+        try {
+            $request->user()->currentAccessToken()->delete();
+
+            return response()->json([
+                'status' => true,
+                'message' => 'User Logged Out Successfully',
+            ], 200);
+
+        } catch (\Throwable $th) {
+            return response()->json([
+                'status' => false,
+                'message' => $th->getMessage()
+            ], 500);
+        }
+    }
+
 
 }

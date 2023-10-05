@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Http\Resources\GoodResource;
+use App\Models\Category;
 use App\Models\Good;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Config;
@@ -32,6 +33,17 @@ class GoodController extends Controller
         return response()->json([
            'message' => true,
            'good' => GoodResource::make($good)
+        ]);
+    }
+
+    public function getGoodsByCategory($slug)
+    {
+        $category = Category::where('slug', $slug)->first();
+        $goods = Good::where('category_id', $category->id)->get();
+
+        return response()->json([
+            'message' => true,
+            'goods' => GoodResource::collection($goods)
         ]);
     }
 }
