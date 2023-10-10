@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use App\Models\Category;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 
@@ -38,6 +39,22 @@ class CategoryService
             $category->update([
                 'name' => $data['name'],
                 'slug' => Str::slug($data['name'] . '-' . Str::random(5), '-')
+            ]);
+        }
+
+        return true;
+    }
+
+    public function get($categories)
+    {
+        DB::table('categories')->truncate();
+        foreach ($categories as $category) {
+            Category::updateOrCreate([
+                'category_id' => $category['id'],
+                'name' => $category['name'],
+                'slug' => Str::slug($category['name'] . '-' . Str::random(5), '-'),
+                'parent_id' => $category['parent_id'],
+                'image' => $category['img']
             ]);
         }
 

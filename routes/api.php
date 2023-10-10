@@ -33,8 +33,15 @@ Route::middleware('auth:sanctum')->group(function () {
    Route::get('getBySlug/{slug}', [\App\Http\Controllers\Api\GoodController::class, 'getBySlug']);
    Route::get('getGoodsByCategory/{slug}', [\App\Http\Controllers\Api\GoodController::class, 'getGoodsByCategory']);
 
-    Route::post('logout', [App\Http\Controllers\Api\AuthController::class, 'logout']);
+   Route::post('convertPhoto', [\App\Http\Controllers\Api\ConvertPhotoController::class, 'convert']);
+   Route::delete('destroy', [\App\Http\Controllers\Api\ConvertPhotoController::class, 'destroy']);
+
+   Route::post('logout', [App\Http\Controllers\Api\AuthController::class, 'logout']);
 });
+
+
+Route::get('get_categories', [\App\Http\Controllers\Api\GetDataFrom1C\CategoryController::class, 'get']);
+Route::get('get_goods', [\App\Http\Controllers\Api\GetDataFrom1C\GoodController::class, 'get']);
 
 Route::post('register', [\App\Http\Controllers\Api\AuthController::class, 'register']);
 Route::post('login', [\App\Http\Controllers\Api\AuthController::class, 'login']);

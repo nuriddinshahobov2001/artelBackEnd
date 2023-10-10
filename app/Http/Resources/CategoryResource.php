@@ -17,8 +17,10 @@ class CategoryResource extends JsonResource
     {
         return [
             'id' => $this->id,
+            'category_id' => $this->category_id,
             'name' => $this->name,
             'slug' => $this->slug,
+            'parent_id' => $this->parent_id,
             'image' => Storage::url($this->image)
         ];
     }
