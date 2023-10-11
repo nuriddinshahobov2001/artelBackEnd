@@ -30,15 +30,17 @@ class BrandService
 
     public function get($brands)
     {
-        DB::table('brands')->truncate();
-        foreach ($brands as $brand)
-        {
-            Brand::create([
-                'name' => $brand['name'],
-                'slug' => Str::slug($brand['name'] . '-' . Str::random(5), '-'),
-            ]);
-        }
+            DB::table('brands')->truncate();
+            foreach ($brands as $brand)
+            {
+                Brand::create([
+                    'brand_id' => $brand['id'],
+                    'name' => $brand['name'],
+                    'slug' => Str::slug($brand['name'] . '-' . Str::random(5), '-'),
+                ]);
+            }
 
-        return true;
+            return true;
+
     }
 }

@@ -20,7 +20,8 @@ class ConvertPhotoController extends Controller
         $imageUrl = url('storage/good_img/' . $fileName);
 
         return response()->json([
-            'image' => $imageUrl
+            'image' => $imageUrl,
+            'name' => $fileName
         ]);
     }
 
