@@ -40,6 +40,7 @@ Route::get('/qwerty', function (){
 Route::get('get_categories', [\App\Http\Controllers\Api\GetDataFrom1C\CategoryController::class, 'get']);
 Route::get('get_goods', [\App\Http\Controllers\Api\GetDataFrom1C\GoodController::class, 'get']);
 Route::get('get_brands', [\App\Http\Controllers\Api\GetDataFrom1C\BrandController::class, 'get']);
+Route::get('get_images', [\App\Http\Controllers\Api\GetDataFrom1C\ImageController::class, 'get']);
 
 Route::post('register', [\App\Http\Controllers\Api\AuthController::class, 'register']);
 Route::post('login', [\App\Http\Controllers\Api\AuthController::class, 'login']);

@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use App\Models\Image;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 
@@ -41,4 +42,22 @@ class ImageService
         return true;
     }
 
+    public function get($images)
+    {
+        DB::beginTransaction();
+        try {
+            DB::table('images')->truncate();
+            foreach ($images as $image) {
+                Image::create([
+                    'good_id' => $image['good_id'],
+                    'image' => $image['image']
+                ]);
+            }
+
+            return true;
+        } catch (\Exception $e) {
+            DB::commit();
+            return $e->getMessage();
+        }
+    }
 }

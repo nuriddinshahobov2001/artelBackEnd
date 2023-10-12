@@ -24,7 +24,7 @@
                     <tr>
                         <td>{{ $loop->iteration }}</td>
                         <td>{{ $image->good->name }}</td>
-                        <td><img src="{{ \Illuminate\Support\Facades\Storage::url($image->image) }}" alt="" width="50"></td>
+                        <td><img src="{{ $image->image }}" alt="" width="50"></td>
                         <td>
                             <a href="#" role="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#editImage{{ $image->id }}">Изменить</a>
                             <a href="#" role="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteImage{{ $image->id }}">Удалить</a>

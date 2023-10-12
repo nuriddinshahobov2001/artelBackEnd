@@ -5,6 +5,7 @@ namespace App\Services;
 use App\Models\Brand;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
+use Mockery\Exception;
 
 class BrandService
 {
@@ -30,6 +31,8 @@ class BrandService
 
     public function get($brands)
     {
+        DB::beginTransaction();
+        try {
             DB::table('brands')->truncate();
             foreach ($brands as $brand)
             {
@@ -41,6 +44,10 @@ class BrandService
             }
 
             return true;
+        } catch (Exception $e) {
+            DB::commit();
+            return $e->getMessage();
+        }
 
     }
 }
