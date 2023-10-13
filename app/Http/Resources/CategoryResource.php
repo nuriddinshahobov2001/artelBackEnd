@@ -2,6 +2,7 @@
 
 namespace App\Http\Resources;
 
+use App\Models\Category;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Support\Facades\Storage;
@@ -15,13 +16,25 @@ class CategoryResource extends JsonResource
      */
     public function toArray(Request $request): array
     {
+        $childCategories = $this->child($this->category_id);
+
         return [
-            'id' => $this->id,
             'category_id' => $this->category_id,
-            'name' => $this->name,
+            'name' => $this->getParentCategory($this->category_id)['name'],
             'slug' => $this->slug,
-            'parent_id' => $this->parent_id,
-            'image' => Storage::url($this->image)
+            'image' => Storage::url($this->image),
+            'child' => $childCategories
         ];
+    }
+
+    public function getParentCategory($ID)
+    {
+        return Category::where('category_id', $ID)->where('parent_id', '=', null)->select('name')->first();
+    }
+
+
+    public function child($parentID)
+    {
+        return Category::where('parent_id', $parentID)->select('name', 'slug')->get();
     }
 }

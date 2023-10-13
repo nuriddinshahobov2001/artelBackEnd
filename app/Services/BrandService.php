@@ -31,7 +31,6 @@ class BrandService
 
     public function get($brands)
     {
-        DB::beginTransaction();
         try {
             DB::table('brands')->truncate();
             foreach ($brands as $brand)
@@ -45,8 +44,7 @@ class BrandService
 
             return true;
         } catch (Exception $e) {
-            DB::commit();
-            return $e->getMessage();
+           return $e->getMessage();
         }
 
     }

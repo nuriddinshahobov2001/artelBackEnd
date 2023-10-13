@@ -47,7 +47,6 @@ class CategoryService
 
     public function get($categories)
     {
-        DB::beginTransaction();
         try {
             DB::table('categories')->truncate();
             foreach ($categories as $category) {
@@ -62,8 +61,8 @@ class CategoryService
 
             return true;
         } catch (\Exception $e) {
-            DB::commit();
             return $e->getMessage();
         }
     }
+
 }

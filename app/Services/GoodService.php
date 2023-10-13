@@ -42,7 +42,6 @@ class GoodService
 
     public function get($goods)
     {
-        DB::beginTransaction();
         try {
             DB::table('goods')->truncate();
             foreach ($goods as $good) {
@@ -63,7 +62,6 @@ class GoodService
 
             return true;
         } catch (\Exception $e) {
-            DB::commit();
             return $e->getMessage();
         }
     }

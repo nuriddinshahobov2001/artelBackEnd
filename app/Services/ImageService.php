@@ -44,7 +44,6 @@ class ImageService
 
     public function get($images)
     {
-        DB::beginTransaction();
         try {
             DB::table('images')->truncate();
             foreach ($images as $image) {
@@ -56,7 +55,6 @@ class ImageService
 
             return true;
         } catch (\Exception $e) {
-            DB::commit();
             return $e->getMessage();
         }
     }
