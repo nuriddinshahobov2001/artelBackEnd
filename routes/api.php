@@ -35,6 +35,8 @@ Route::get('/qwerty', function (){
    Route::post('convertPhoto', [\App\Http\Controllers\Api\ConvertPhotoController::class, 'convert']);
    Route::delete('destroy', [\App\Http\Controllers\Api\ConvertPhotoController::class, 'destroy']);
 
+   Route::post('/order', [\App\Http\Controllers\Api\OrderController::class, 'order']);
+
    Route::post('logout', [App\Http\Controllers\Api\AuthController::class, 'logout']);
 
 Route::get('get_categories', [\App\Http\Controllers\Api\GetDataFrom1C\CategoryController::class, 'get']);
