@@ -22,7 +22,7 @@ class OrderController extends Controller
             'products.*.count' => 'required',
             'products.*.price' => 'required',
             'products.*.sale' => '',
-            'phone' => 'required',
+            'email' => 'required|email',
             'product_sum' => 'required',
             'delivery' => '',
             'delivery_sum' => '',
