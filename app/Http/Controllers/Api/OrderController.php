@@ -22,11 +22,11 @@ class OrderController extends Controller
             'products.*.count' => 'required',
             'products.*.price' => 'required',
             'products.*.sale' => '',
-            'email' => 'required|email',
+            'phone' => 'required',
             'product_sum' => 'required',
             'delivery' => '',
             'delivery_sum' => '',
-            'total_summa' => ''
+            'total_summa' => '',
         ]);
 
         if ($data->fails()) {

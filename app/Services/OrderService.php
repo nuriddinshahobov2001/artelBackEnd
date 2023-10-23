@@ -22,7 +22,7 @@ class OrderService
                    'count' => $product['count'],
                    'price' => $product['price'],
                    'sale' => $product['sale'],
-                   'email' => $order['email'],
+                   'phone' => $order['phone'],
                    'product_sum' => $order['product_sum'],
                    'delivery' => $order['delivery'],
                    'delivery_sum' => $order['delivery_sum'],
