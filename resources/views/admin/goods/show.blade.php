@@ -4,7 +4,7 @@
     <a href="{{ route('good.index') }}" class="btn btn-outline-danger mb-2 col-1" style="margin-right: 10px">
         Назад
     </a>
-    <a href="{{ route('good.edit', $good->id) }}" class="btn btn-outline-primary mb-2 col-2">
+    <a href="{{ route('good.edit', $good->id) }}" class="btn btn-outline-primary mb-2 col-1">
         Изменить
     </a>
     <div class="card">

@@ -6,6 +6,8 @@ use App\Models\Good;
 use App\Models\Image;
 use App\Services\ImageService;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Config;
+use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 
@@ -55,5 +57,26 @@ class ImageController extends Controller
         $image->delete();
 
         return redirect()->back()->with('success', 'Успешно удалено!');
+    }
+
+    public function get()
+    {
+        $response = Http::withHeaders([
+            'Content-Type' => 'application/json; charset=utf-8'
+        ])->withBasicAuth(
+            Config::get('constants.credentials.login'),
+            Config::get('constants.credentials.password'),
+        )->get(Config::get('constants.api.get_images'));
+
+        if (!$response->successful()) {
+            return redirect()->back()->with('error','Ошибка при загрузке!');
+        }
+
+        $res = $this->imageService->get($response->json()['data']);
+        if ($res) {
+            return redirect()->back()->with('success', 'Успешно загружено!');
+        } else {
+            return redirect()->back()->with('error', $res);
+        }
     }
 }

@@ -24,7 +24,9 @@ class ImageController extends Controller
             Config::get('constants.credentials.password'),
         )->get(Config::get('constants.api.get_images'));
 
-        $res = $this->imageService->get($response->json()['data']);
+        if ($response->successful()) {
+            $res = $this->imageService->get($response->json()['data']);
+        }
 
         return response()->json([
             'message' => $res

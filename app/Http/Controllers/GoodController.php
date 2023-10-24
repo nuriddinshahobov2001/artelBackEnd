@@ -8,6 +8,8 @@ use App\Models\Brand;
 use App\Models\Category;
 use App\Models\Good;
 use App\Services\GoodService;
+use Illuminate\Support\Facades\Config;
+use Illuminate\Support\Facades\Http;
 
 class GoodController extends Controller
 {
@@ -67,4 +69,24 @@ class GoodController extends Controller
         return redirect()->back()->with('success', 'Данные успешно удалены!');
     }
 
+    public function get()
+    {
+        $response = Http::withHeaders([
+            'Content-Type' => 'application/json; charset=utf-8'
+        ])->withBasicAuth(
+            Config::get('constants.credentials.login'),
+            Config::get('constants.credentials.password')
+        )->get(Config::get('constants.api.get_goods'));
+
+        if (!$response->successful()) {
+            return redirect()->back()->with('error', 'Ошибка при загрузки товаров!');
+        }
+
+        $goods = $response->json()['data'];
+        $res = $this->goodService->get($goods);
+
+        if ($res) {
+            return redirect()->back()->with('success', 'Успешно загружено!');
+        }
+    }
 }

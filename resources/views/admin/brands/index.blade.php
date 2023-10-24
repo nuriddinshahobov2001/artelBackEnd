@@ -7,9 +7,17 @@
                 {{ \Session::get('success') }}
                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
             </div>
+        @elseif(\Session::has('error'))
+            <div class="alert alert-danger alert-dismissible show fade">
+                {{ \Session::get('error') }}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
         @endif
             <a href="#" role="button" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#addBrand">
                 Добавить
+            </a>
+            <a href="{{ route('brands.get') }}" class="btn btn-outline-success">
+                Загрузить
             </a>
         <div>
             <table class="table">
@@ -24,8 +32,14 @@
                         <td>{{ $loop->iteration }}</td>
                         <td>{{ $brand->name }}</td>
                         <td>
-                            <a href="#" role="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#editBrand{{ $brand->id }}">Изменить</a>
-                            <a href="#" role="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteBrand{{ $brand->id }}">Удалить</a>
+                            <a href="#" role="button" class="btn btn-primary"
+                               data-bs-toggle="modal" data-bs-target="#editBrand{{ $brand->id }}">
+                                <i class="bi bi-pencil"></i>
+                            </a>
+                            <a href="#" role="button" class="btn btn-danger"
+                               data-bs-toggle="modal" data-bs-target="#deleteBrand{{ $brand->id }}">
+                                <i class="bi bi-trash"></i>
+                            </a>
                         </td>
                     </tr>
 

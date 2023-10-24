@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Http\Requests\CategoryRequest;
 use App\Models\Category;
 use App\Services\CategoryService;
+use Illuminate\Support\Facades\Config;
+use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Storage;
 
 class CategoryController extends Controller
@@ -46,5 +48,26 @@ class CategoryController extends Controller
         $category->delete();
 
         return redirect()->back()->with('success', 'Успешно удалено!');
+    }
+
+    public function get()
+    {
+        $response = Http::withHeaders([
+            'Content-Type' => 'application/json; charset=utf-8'
+        ])->withBasicAuth(
+            Config::get('constants.credentials.login'),
+            Config::get('constants.credentials.password')
+        )->get(Config::get('constants.api.get_categories'));
+
+        if (!$response->successful()) {
+            return redirect()->back()->with('error', 'Ошибка при загрузке!');
+        }
+
+        $res = $this->categoryService->get($response->json()['data']);
+        if ($res) {
+            return redirect()->back()->with('success', 'Успешно загружено!');
+        } else {
+            return redirect()->back()->with('error', $res);
+        }
     }
 }
