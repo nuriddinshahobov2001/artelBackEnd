@@ -31,7 +31,7 @@
                 @foreach($images as $image)
                     <tr>
                         <td>{{ $loop->iteration }}</td>
-                        <td>{{ $image->good->name }}</td>
+                        <td>{{ $image->good?->name }}</td>
                         <td><img src="{{ $image->image }}" alt="" width="50"></td>
                         <td>
                             <a href="#" role="button" class="btn btn-primary"
