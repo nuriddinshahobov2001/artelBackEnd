@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('good_id')->nullable();
             $table->string('image');
+            $table->boolean('is_main')->default(false);
             $table->timestamps();
         });
     }

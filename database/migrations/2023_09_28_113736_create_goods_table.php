@@ -16,8 +16,8 @@ return new class extends Migration
             $table->string('good_id')->nullable();
             $table->string('name');
             $table->string('slug');
-            $table->string('description')->nullable();
-            $table->json('full_description')->nullable();
+            $table->text('description')->nullable();
+            $table->text('full_description')->nullable();
             $table->string('category_id');
             $table->string('brand_id')->nullable();
             $table->decimal('price')->nullable();

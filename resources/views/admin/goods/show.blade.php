@@ -45,13 +45,16 @@
                     <textarea class="form-control" cols="30" rows="3" disabled>{{ $good->description }}</textarea>
                 </div>
 
-                <div class="col-7">
-                    <label for="full_description">Полное описание</label>
-                    <textarea class="form-control" cols="30" rows="3" disabled>{{ $good->full_description }}</textarea>
+                <div class="col-7" >
+                    <label>Полное описание</label>
+                    <textarea class="form-control" cols="30" rows="3" disabled
+                            >@foreach(json_decode($good->full_description) as $item) @foreach($item as $key => $value){{ $key }}: {{ $value . "\n" }} @endforeach @endforeach
+                    </textarea>
                 </div>
             </div>
         </div>
     </div>
+
     @if(isset($good->images))
         @foreach($good->images as $image)
             <img src="{{ $image?->image }}"  style="width: 200px">

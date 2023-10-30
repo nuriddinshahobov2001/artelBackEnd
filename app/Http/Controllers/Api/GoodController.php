@@ -26,6 +26,7 @@ class GoodController extends Controller
         ]);
     }
 
+
     public function getBySlug($slug)
     {
         $good = Good::where('slug', $slug)->first();

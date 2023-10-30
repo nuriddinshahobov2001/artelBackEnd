@@ -29,7 +29,7 @@ class GoodStoreRequest extends FormRequest
             'count' => '',
             'sale' => '',
             'description' => '',
-            'full_description' => ''
+            'full_description' => 'array'
         ];
     }
 }

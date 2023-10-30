@@ -25,7 +25,7 @@ class GoodUpdateRequest extends FormRequest
             'name' => 'required',
             'category_id' => 'required',
             'brand_id' => 'required',
-            'price' => 'integer',
+            'price' => 'required',
             'count' => '',
             'sale' => '',
             'description' => '',
