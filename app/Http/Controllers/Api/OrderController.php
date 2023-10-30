@@ -26,7 +26,7 @@ class OrderController extends Controller
             'product_sum' => 'required',
             'delivery' => '',
             'delivery_sum' => '',
-            'total_summa' => '',
+            'total_sum' => '',
         ]);
 
         if ($data->fails()) {
