@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Resources\GoodResource;
 use App\Models\Category;
 use App\Models\Good;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Http;
@@ -37,10 +38,10 @@ class GoodController extends Controller
         ]);
     }
 
-    public function getGoodsByCategory($slug)
+    public function getGoodsByCategory($slug): JsonResponse
     {
         $category = Category::where('slug', $slug)->first();
-        $goods = Good::where('category_id', $category->id)->get();
+        $goods = Good::where('category_id', $category?->category_id)->get();
 
         return response()->json([
             'message' => true,

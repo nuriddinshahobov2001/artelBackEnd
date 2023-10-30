@@ -57,6 +57,13 @@
                     <span>Картинки</span>
                 </a>
             </li>
+            <li class="sidebar-item">
+                <hr>
+                <a href="{{ route('logout') }}" class='sidebar-link'>
+                    <i class="bi bi-box-arrow-left"></i>
+                    <span>Выйти</span>
+                </a>
+            </li>
 
         </ul>
     </div>
