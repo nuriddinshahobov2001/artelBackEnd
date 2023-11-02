@@ -26,20 +26,19 @@ class OrderService
                    'product_sum' => $order['product_sum'],
                    'delivery' => $order['delivery'],
                    'delivery_sum' => $order['delivery_sum'],
-                   'total_sum' => $order['total_sum'],
+                   'total_summa' => $order['total_sum'],
                    'order_code' => $random
                 ]);
             }
             DB::commit();
 
-            $res = Http::withHeaders([
+            Http::withHeaders([
                'Content-Type' => 'application/json; charset=utf-8'
             ])->withBasicAuth(
                 Config::get('constants.credentials.login'),
                 Config::get('constants.credentials.password')
             )->post(Config::get('constants.api.order'), $order);
 
-            dd($res);
             return true;
         } catch (\Exception $e) {
             DB::rollBack();
