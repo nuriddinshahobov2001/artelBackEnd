@@ -97,6 +97,7 @@ class AuthController extends Controller
         $data = Validator::make($request->all(), [
            'email' => 'required|email'
         ]);
+
         $email = $data->validated();
 
         $user = User::where('email', $email['email'])->first();
@@ -156,6 +157,7 @@ class AuthController extends Controller
         $user = User::where('email', $password['email'])->first();
         if ($user) {
             $user->password = Hash::make($password['password']);
+            $user->code = 0;
             $user->save();
 
             return response()->json([

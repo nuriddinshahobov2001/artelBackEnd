@@ -61,7 +61,7 @@ class CategoryService
 
             return true;
         } catch (\Exception $e) {
-            return $e->getMessage();
+            dd($e->getMessage());
         }
     }
 

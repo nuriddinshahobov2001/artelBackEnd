@@ -35,7 +35,7 @@ Route::get('/qwerty', function (){
    Route::post('convertPhoto', [\App\Http\Controllers\Api\ConvertPhotoController::class, 'convert']);
    Route::delete('destroy', [\App\Http\Controllers\Api\ConvertPhotoController::class, 'destroy']);
 
-   Route::post('/order', [\App\Http\Controllers\Api\OrderController::class, 'order']);
+   Route::post('/order', [\App\Http\Controllers\Api\OrderController::class, 'order'])->middleware('auth:sanctum');
 
    Route::post('logout', [App\Http\Controllers\Api\AuthController::class, 'logout']);
 
