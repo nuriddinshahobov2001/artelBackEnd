@@ -26,7 +26,7 @@ class OrderService
                    'product_sum' => $order['product_sum'],
                    'delivery' => $order['delivery'],
                    'delivery_sum' => $order['delivery_sum'],
-                   'total_summa' => $order['total_sum'],
+                   'total_sum' => $order['total_sum'],
                    'order_code' => $random
                 ]);
             }
