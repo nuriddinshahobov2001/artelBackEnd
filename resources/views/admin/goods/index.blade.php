@@ -39,9 +39,9 @@
                         <td>{{ $good->brand?->name }}</td>
                         <td>{{ $good->price }}</td>
                         <td>
-                            <a href="{{ route('good.edit', $good->id) }}" class="btn btn-primary">
-                                <i class="bi bi-pencil"></i>
-                            </a>
+{{--                            <a href="{{ route('good.edit', $good->id) }}" class="btn btn-primary">--}}
+{{--                                <i class="bi bi-pencil"></i>--}}
+{{--                            </a>--}}
                             <a href="{{ route('good.show', $good->id) }}" class="btn btn-warning">
                                 <i class="bi bi-eye"></i>
                             </a>
