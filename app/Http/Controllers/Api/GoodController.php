@@ -17,10 +17,6 @@ class GoodController extends Controller
     {
         $goods = Good::inRandomOrder()->limit(20)->get();
 
-//        $response = Http::withHeaders([
-//            'Content-Type' => 'application/json; charset=utf-8',
-//        ])->withBasicAuth('Admin', 3008)->get('http://95.142.94.22:8080/OSONSRV/hs/shop/GetAllProducts');
-
         return response()->json([
            'message' => true,
             'goods' => GoodResource::collection($goods)
