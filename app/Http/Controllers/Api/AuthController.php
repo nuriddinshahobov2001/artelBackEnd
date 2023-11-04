@@ -16,7 +16,6 @@ class AuthController extends Controller
     public function register(Request $request)
     {
         try {
-
             $validateUser = Validator::make($request->all(),
                 [
                     'name' => 'required',
@@ -149,28 +148,45 @@ class AuthController extends Controller
     {
         $data = Validator::make($request->all(), [
             'email' => 'required|email',
-            'password' => 'string'
+            'code' => 'required',
+            'password' => 'required|string|min:6',
         ]);
+
+        if ($data->fails()) {
+            return response()->json([
+                'message' => false,
+                'info' => $data->errors()->first(),
+            ]);
+        }
 
         $password = $data->validated();
 
         $user = User::where('email', $password['email'])->first();
-        if ($user) {
-            $user->password = Hash::make($password['password']);
-            $user->code = 0;
-            $user->save();
 
-            return response()->json([
-                'message' => true,
-                'info' => 'Пароль успешно изменен!',
-            ]);
-        } else {
+        if (!$user) {
             return response()->json([
                 'message' => false,
-                'info' => 'Неверный e-mail'
+                'info' => 'Неверный e-mail',
             ]);
         }
+
+        if ($user->code !== $password['code']) {
+            return response()->json([
+                'message' => false,
+                'info' => 'Неверный код',
+            ]);
+        }
+
+        $user->password = Hash::make($password['password']);
+        $user->code = 0;
+        $user->save();
+
+        return response()->json([
+            'message' => true,
+            'info' => 'Пароль успешно изменен!',
+        ]);
     }
+
 
     public function logout(Request $request)
     {
@@ -189,6 +205,4 @@ class AuthController extends Controller
             ], 500);
         }
     }
-
-
 }
