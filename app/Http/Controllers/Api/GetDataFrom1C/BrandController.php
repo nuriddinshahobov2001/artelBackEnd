@@ -10,6 +10,8 @@ use Illuminate\Support\Facades\Http;
 
 class BrandController extends Controller
 {
+    private BrandService $brandService;
+
     public function __construct(BrandService $brandService)
     {
         $this->brandService = $brandService;

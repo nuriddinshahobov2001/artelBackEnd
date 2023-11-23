@@ -10,6 +10,8 @@ use Illuminate\Support\Facades\Http;
 
 class GoodController extends Controller
 {
+    private GoodService $goodService;
+
     public function __construct(GoodService $goodService)
     {
         $this->goodService = $goodService;

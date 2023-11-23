@@ -9,7 +9,7 @@ use Illuminate\Support\Str;
 
 class CategoryService
 {
-    public function store($data)
+    public function store($data): bool
     {
         if (isset($data['image'])) $img = Storage::disk('public')->put('category_img', $data['image']);
 
@@ -22,7 +22,7 @@ class CategoryService
         return true;
     }
 
-    public function update($data, $category)
+    public function update($data, $category): bool
     {
         if (isset($data['image'])) {
             $img = Storage::disk('public')->put('category_img', $data['image']);

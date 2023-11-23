@@ -8,7 +8,7 @@ use Illuminate\Support\Str;
 
 class GoodService
 {
-    public function store($data)
+    public function store($data): bool
     {
         Good::updateOrCreate([
            'name' => $data['name'],
@@ -25,7 +25,7 @@ class GoodService
         return true;
     }
 
-    public function update($data, $good)
+    public function update($data, $good): bool
     {
         $good->update([
             'name' => $data['name'],
@@ -38,6 +38,8 @@ class GoodService
             'sale' => $data['sale'],
             'count' => $data['count']
         ]);
+
+        return true;
     }
 
     public function get($goods)

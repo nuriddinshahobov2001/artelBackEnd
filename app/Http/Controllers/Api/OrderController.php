@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Services\OrderService;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
@@ -14,7 +15,7 @@ class OrderController extends Controller
         $this->orderService = $orderService;
     }
 
-    public function order(Request $request)
+    public function order(Request $request): JsonResponse
     {
         $data = Validator::make($request->all(), [
             'products' => 'required|array',

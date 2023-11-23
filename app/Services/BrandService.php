@@ -9,7 +9,7 @@ use Mockery\Exception;
 
 class BrandService
 {
-    public function store($data)
+    public function store($data): bool
     {
         Brand::create([
             'name' => $data['name'],
@@ -19,7 +19,7 @@ class BrandService
         return true;
     }
 
-    public function update($data, $brand)
+    public function update($data, $brand): bool
     {
         $brand->update([
             'name' => $data['name'],

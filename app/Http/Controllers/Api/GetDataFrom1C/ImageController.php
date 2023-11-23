@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api\GetDataFrom1C;
 
 use App\Http\Controllers\Controller;
 use App\Services\ImageService;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Http;
@@ -15,7 +16,7 @@ class ImageController extends Controller
         $this->imageService = $imageService;
     }
 
-    public function get()
+    public function get(): JsonResponse
     {
         $response = Http::withHeaders([
            'Content-Type' => 'application/json; charset=utf-8'

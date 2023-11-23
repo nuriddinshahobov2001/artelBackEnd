@@ -16,7 +16,7 @@ class GoodController extends Controller
 {
     public function getRandomGoods(): JsonResponse
     {
-        $goods = Good::inRandomOrder()->limit(20)->get();
+        $goods = Good::query()->inRandomOrder()->limit(20)->get();
 
         return response()->json([
            'message' => true,
@@ -27,7 +27,14 @@ class GoodController extends Controller
 
     public function getBySlug($slug): JsonResponse
     {
-        $good = Good::where('slug', $slug)->first();
+        $good = Good::query()->where('slug', $slug)->first();
+
+        if (!$good) {
+            return response()->json([
+                'message' => false,
+                'info' => 'Такого товара не существует!'
+            ]);
+        }
 
         return response()->json([
            'message' => true,
@@ -37,7 +44,7 @@ class GoodController extends Controller
 
     public function getGoodsByCategory($slug): JsonResponse
     {
-        $category = Category::where('slug', $slug)->first();
+        $category = Category::query()->where('slug', $slug)->first();
         $goods = Good::where('category_id', $category?->category_id)->get();
 
         return response()->json([
@@ -48,7 +55,7 @@ class GoodController extends Controller
 
     public function getSimilarProducts($categorySlug, $goodSlug): JsonResponse
     {
-        $category = Category::where('slug', $categorySlug)->select('category_id')->first();
+        $category = Category::query()->where('slug', $categorySlug)->select('category_id')->first();
 
         if ($category === null) {
             return response()->json([
@@ -57,7 +64,7 @@ class GoodController extends Controller
             ]);
         }
 
-        $goods = Good::filter()->where([
+        $goods = Good::query()->where([
             ['category_id', $category->category_id],
             ['slug', '!=', $goodSlug]
         ])->inRandomOrder()->limit(20)->get();

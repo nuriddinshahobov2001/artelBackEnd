@@ -3,12 +3,13 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
 class ConvertPhotoController extends Controller
 {
-    public function convert(Request $request)
+    public function convert(Request $request): JsonResponse
     {
         $base64 = $request->base64;
 
@@ -25,7 +26,7 @@ class ConvertPhotoController extends Controller
         ]);
     }
 
-    public function destroy(Request $request)
+    public function destroy(Request $request): JsonResponse
     {
         $path = 'public/good_img/' . $request->image;
 
