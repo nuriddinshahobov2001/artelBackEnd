@@ -25,4 +25,15 @@ class Good extends Model
     {
         return $this->hasMany(Image::class, 'good_id', 'good_id');
     }
+
+    public function scopeFilter($query)
+    {
+        return $query->where([
+            ['price', '!=', 0],
+            ['name', '!=', ''],
+            ['full_description', '!=', '[]']
+        ])->whereHas('images', function ($query) {
+            $query->where('is_main', true);
+        })->orderBy('created_at', 'desc');
+    }
 }

@@ -21,7 +21,6 @@ class GoodController extends Controller
     public function index()
     {
         $goods = Good::with('category', 'brand')->get();
-
         return view('admin.goods.index', compact('goods'));
     }
 
