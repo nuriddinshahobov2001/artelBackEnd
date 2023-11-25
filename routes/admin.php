@@ -24,5 +24,10 @@ Route::middleware('auth')->group(function () {
 
    Route::resource('/good', \App\Http\Controllers\GoodController::class);
    Route::get('/get', [\App\Http\Controllers\GoodController::class, 'get'])->name('good.get');
+   Route::get('goodsWithDefects', [\App\Http\Controllers\GoodController::class, 'goodsWithDefects'])->name('goodsWithDefects');
+   Route::get('goodsWithDefects/{slug}', [\App\Http\Controllers\GoodController::class, 'showGoodsWithDefects'])->name('showGoodsWithDefects');
+
+    Route::get('get/goods/excel', [\App\Http\Controllers\ExcelController::class, 'excel'])->name('excel');
+
 });
 

@@ -14,9 +14,6 @@
             </div>
 
         @endif
-        <a href="#" role="button" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#addCategory">
-            Добавить
-        </a>
         <a href="{{ route('category.get') }}" class="btn btn-outline-success">
             Загрузить
         </a>
@@ -36,49 +33,11 @@
                         <td><img src="{{ \Illuminate\Support\Facades\Storage::url($category->image) }}" alt=""
                                  width="50"></td>
                         <td>
-                            <a href="#" role="button" class="btn btn-primary"
-                               data-bs-toggle="modal" data-bs-target="#editCategory{{ $category->id }}"><i
-                                    class="bi bi-pencil"></i></a>
                             <a href="#" role="button" class="btn btn-danger"
                                data-bs-toggle="modal" data-bs-target="#deleteCategory{{ $category->id }}"><i
                                     class="bi bi-trash"></i></a>
                         </td>
                     </tr>
-
-                    <div class="modal fade" id="editCategory{{ $category->id }}" tabindex="-1"
-                         aria-labelledby="exampleModalLabel" aria-hidden="true">
-                        <div class="modal-dialog">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h5 class="modal-title" id="exampleModalLabel">Изменение категории</h5>
-                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                            aria-label="Закрыть"></button>
-                                </div>
-                                <div class="modal-body">
-                                    <form action="{{ route('category.update', $category->id) }}" method="POST"
-                                          enctype="multipart/form-data">
-                                        @csrf
-                                        @method('PUT')
-
-                                        <label for="name">Имя</label>
-                                        <input type="text" name="name" class="form-control"
-                                               value="{{ $category->name }}">
-
-                                        <label for="name">Выберите картинку</label>
-                                        <input type="file" name="image" class="form-control">
-
-                                        <br>
-                                        <div class="float-end">
-                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
-                                                Отмена
-                                            </button>
-                                            <button type="submit" class="btn btn-primary">Изменить</button>
-                                        </div>
-                                    </form>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
 
                     <div class="modal fade" id="deleteCategory{{ $category->id }}" tabindex="-1"
                          aria-labelledby="exampleModalLabel" aria-hidden="true">

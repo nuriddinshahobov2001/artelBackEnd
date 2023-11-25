@@ -40,10 +40,6 @@
                         <input name="sale" class="form-control mt-3" value="{{ $good->sale }}" disabled>
                     </div>
                 </div>
-                <div class="col-5">
-                    <label for="description">Описание</label>
-                    <textarea class="form-control" cols="30" rows="3" disabled>{{ $good->description }}</textarea>
-                </div>
 
                 <div class="col-7" >
                     <label>Полное описание</label>

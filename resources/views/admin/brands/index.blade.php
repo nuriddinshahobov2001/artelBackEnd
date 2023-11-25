@@ -13,9 +13,6 @@
                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
             </div>
         @endif
-            <a href="#" role="button" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#addBrand">
-                Добавить
-            </a>
             <a href="{{ route('brands.get') }}" class="btn btn-outline-success">
                 Загрузить
             </a>
@@ -32,41 +29,12 @@
                         <td>{{ $loop->iteration }}</td>
                         <td>{{ $brand->name }}</td>
                         <td>
-                            <a href="#" role="button" class="btn btn-primary"
-                               data-bs-toggle="modal" data-bs-target="#editBrand{{ $brand->id }}">
-                                <i class="bi bi-pencil"></i>
-                            </a>
                             <a href="#" role="button" class="btn btn-danger"
                                data-bs-toggle="modal" data-bs-target="#deleteBrand{{ $brand->id }}">
                                 <i class="bi bi-trash"></i>
                             </a>
                         </td>
                     </tr>
-
-                    <div class="modal fade" id="editBrand{{ $brand->id }}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                        <div class="modal-dialog">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h5 class="modal-title" id="exampleModalLabel">Изменение бренда</h5>
-                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Закрыть"></button>
-                                </div>
-                                <div class="modal-body">
-                                    <form action="{{ route('brands.update', $brand->id) }}" method="POST">
-                                        @csrf
-                                        @method('PUT')
-
-                                        <label for="name">Имя</label>
-                                        <input type="text" name="name" class="form-control" value="{{ $brand->name }}">
-                                        <br>
-                                        <div class="float-end">
-                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Отмена</button>
-                                            <button type="submit" class="btn btn-primary">Изменить</button>
-                                        </div>
-                                    </form>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
 
                     <div class="modal fade" id="deleteBrand{{ $brand->id }}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                         <div class="modal-dialog">

@@ -89,4 +89,18 @@ class GoodController extends Controller
             return redirect()->back()->with('success', 'Успешно загружено!');
         }
     }
+
+    public function goodsWithDefects()
+    {
+        $goods = Good::unFilter()->get();
+
+        return view('admin.goods.goods_with_defects', compact('goods'));
+    }
+
+    public function showGoodsWithDefects($slug)
+    {
+        $good = Good::where('slug', $slug)->with('category', 'brand', 'images')->first();
+
+        return view('admin.goods.show_good_with_defects', compact('good'));
+    }
 }

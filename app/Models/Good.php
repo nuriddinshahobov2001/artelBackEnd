@@ -36,4 +36,18 @@ class Good extends Model
             $query->where('is_main', true);
         })->orderBy('created_at', 'desc');
     }
+
+    public function scopeUnFilter($query)
+    {
+        return $query->where(function ($query) {
+            $query->where('price', 0)
+                ->orWhere('name', '')
+                ->orWhere('full_description', '[]');
+        })->orWhere(function ($query) {
+            $query->doesntHave('images')
+                ->orWhereDoesntHave('images', function ($query) {
+                    $query->where('is_main', true);
+                });
+        });
+    }
 }
