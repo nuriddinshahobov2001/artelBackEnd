@@ -20,7 +20,7 @@ class AuthController extends Controller
             $validateUser = Validator::make($request->all(),
                 [
                     'name' => 'required',
-                    'email' => 'required|email|unique:users,email',
+                    'phone' => 'required|unique:users,phone',
                     'password' => 'required'
                 ]);
 
@@ -34,7 +34,7 @@ class AuthController extends Controller
 
             $user = User::create([
                 'name' => $request->name,
-                'email' => $request->email,
+                'phone' => $request->phone,
                 'password' => Hash::make($request->password)
             ]);
 
@@ -57,7 +57,7 @@ class AuthController extends Controller
         try {
             $validateUser = Validator::make($request->all(),
                 [
-                    'email' => 'required|email',
+                    'phone' => 'required',
                     'password' => 'required'
                 ]);
 
@@ -69,14 +69,14 @@ class AuthController extends Controller
                 ], 401);
             }
 
-            if (!Auth::attempt($request->only(['email', 'password']))) {
+            if (!Auth::attempt($request->only(['phone', 'password']))) {
                 return response()->json([
                     'status' => false,
-                    'message' => 'Email & Password does not match with our record.',
+                    'message' => 'Телефон или пароль не правильный!',
                 ],401);
             }
 
-            $user = User::where('email', $request->email)->first();
+            $user = User::where('phone', $request->email)->first();
 
             return response()->json([
                 'status' => true,
