@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\OrderRequest;
 use App\Services\OrderService;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -15,29 +16,11 @@ class OrderController extends Controller
         $this->orderService = $orderService;
     }
 
-    public function order(Request $request): JsonResponse
+    public function order(OrderRequest $request): JsonResponse
     {
-        $data = Validator::make($request->all(), [
-            'products' => 'required|array',
-            'products.*.good_id' => 'required',
-            'products.*.count' => 'required',
-            'products.*.price' => 'required',
-            'products.*.sale' => '',
-            'email' => 'required|email',
-            'product_sum' => 'required',
-            'delivery' => '',
-            'delivery_sum' => '',
-            'total_sum' => '',
-        ]);
+        $data = $request->validated();
 
-        if ($data->fails()) {
-            return response()->json([
-                'message' => false,
-                'errors' => $data->errors()
-            ], 200);
-        }
-
-        $order = $this->orderService->order($data->validated());
+        $order = $this->orderService->order($data);
 
         return  response()->json([
             'message' => $order

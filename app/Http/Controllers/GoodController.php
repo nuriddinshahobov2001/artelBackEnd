@@ -26,8 +26,7 @@ class GoodController extends Controller
 
     public function show(Good $good)
     {
-        $full_description = json_decode($good->full_description);
-        return view('admin.goods.show', compact('good', 'full_description'));
+        return view('admin.goods.show', compact('good'));
     }
 
     public function create()

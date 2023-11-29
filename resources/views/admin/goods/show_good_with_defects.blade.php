@@ -51,11 +51,11 @@
                     </textarea>
                 </div>
             </div>
-
         </div>
+
         @if(isset($good->images))
             @foreach($good->images as $good_img)
-                <img src="{{ $good_img?->img_url }}" width="200px" height="200px" alt="">
+                <img src="{{ $good_img?->image }}" width="200px" height="200px" alt="">
                 @if($good_img->is_main)
                     <p>main</p>
                 @endif

@@ -3,8 +3,10 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Auth\RegisterRequest;
 use App\Mail\SendCodeMail;
 use App\Models\User;
+use App\Services\AuthService;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -14,29 +16,18 @@ use Illuminate\Support\Facades\Validator;
 
 class AuthController extends Controller
 {
-    public function register(Request $request): JsonResponse
+    private AuthService $authService;
+
+    public function __construct(AuthService $authService)
+    {
+        $this->authService = $authService;
+    }
+
+    public function register(RegisterRequest $request): JsonResponse
     {
         try {
-            $validateUser = Validator::make($request->all(),
-                [
-                    'name' => 'required',
-                    'phone' => 'required|unique:users,phone',
-                    'password' => 'required'
-                ]);
-
-            if ($validateUser->fails()) {
-                return response()->json([
-                    'status' => false,
-                    'message' => 'validation error',
-                    'errors' => $validateUser->errors()
-                ], 401);
-            }
-
-            $user = User::create([
-                'name' => $request->name,
-                'phone' => $request->phone,
-                'password' => Hash::make($request->password)
-            ]);
+            $data = $request->validated();
+            $user = $this->authService->register($data);
 
             return response()->json([
                 'status' => true,
