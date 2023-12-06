@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('slug');
             $table->text('description')->nullable();
             $table->text('full_description')->nullable();
-            $table->string('category_id');
+            $table->string('category_id')->nullable();
             $table->string('brand_id')->nullable();
             $table->decimal('price')->nullable();
             $table->decimal('sale')->nullable();

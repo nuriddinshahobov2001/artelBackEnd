@@ -39,7 +39,7 @@
 
     @guest()
         @yield('login')
-        @endguest
+    @endguest
 
 </div>
 <script src="{{asset('assets/js/bootstrap.js')}}"></script>
