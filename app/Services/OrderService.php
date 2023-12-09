@@ -22,11 +22,11 @@ class OrderService
                    'count' => $product['count'],
                    'price' => $product['price'],
                    'sale' => $product['sale'],
-                   'email' => $order['email'],
-                   'product_sum' => $order['product_sum'],
-                   'delivery' => $order['delivery'],
-                   'delivery_sum' => $order['delivery_sum'],
-                   'total_summa' => $order['total_summa'],
+                   'phone' => $order['phone'],
+                   'comments' => $order['comments'],
+                   'address' => $order['address'],
+                   'totalPrice' => $order['totalPrice'],
+                   'delivery' =>$order['isDelivery'],
                    'order_code' => $random
                 ]);
             }

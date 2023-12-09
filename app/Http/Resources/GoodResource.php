@@ -18,7 +18,7 @@ class GoodResource extends JsonResource
         $image = null;
         foreach ($this->images as $img) {
             if ($img->is_main === 1) {
-                $image = $img->img_url;
+                $image = $img->image;
             }
         }
 
@@ -32,14 +32,15 @@ class GoodResource extends JsonResource
             'sale' => $this->sale,
             'count' => $this->count,
             'image' => $image,
-            'images' => $this->all_images($this->good_id),
+//            'images' => $this->all_images($this->good_id),
+            'images' => $this->all_images($this->id),
         ];
     }
     public function all_images($id)
     {
         $images = array();
         $good_imgs = Image::where([
-            ['good_id', $id],
+            ['id', $id],
             ['is_main', '!==', 1]
         ])->get();
 

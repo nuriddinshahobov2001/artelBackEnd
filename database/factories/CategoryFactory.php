@@ -21,6 +21,7 @@ class CategoryFactory extends Factory
             'name' => fake()->name(),
             'category_id' => rand(1000, 2000),
             'slug' => Str::slug(fake()->name()),
+            'parent_id' => rand(1, 10)
         ];
     }
 }

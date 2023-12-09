@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\Category;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
 
@@ -21,7 +22,8 @@ class GoodFactory extends Factory
             'name' => fake()->name(),
             'slug' => Str::slug(fake()->name()),
             'description' => fake()->text(),
-            'full_description' => fake()->text()
+            'full_description' => fake()->text(),
+            'category_id' => Category::find(rand(1, 20))->first()
         ];
     }
 }

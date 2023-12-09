@@ -29,11 +29,11 @@ class OrderRequest extends FormRequest
             'products.*.count' => 'required',
             'products.*.price' => 'required',
             'products.*.sale' => '',
-            'email' => 'required|email',
-            'product_sum' => 'required',
-            'delivery' => '',
-            'delivery_sum' => '',
-            'total_summa' => '',
+            'phone' => 'required',
+            'comments' => '',
+            'address' => '',
+            'isDelivery' => '',
+            'totalPrice' => '',
         ];
     }
 

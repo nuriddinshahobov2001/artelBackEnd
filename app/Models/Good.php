@@ -23,7 +23,7 @@ class Good extends Model
 
     public function images()
     {
-        return $this->hasMany(Image::class, 'good_id', 'good_id');
+        return $this->hasMany(Image::class, 'good_id', 'id');
     }
 
     public function scopeFilter($query)

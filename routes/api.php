@@ -24,6 +24,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
    Route::get('brand', [\App\Http\Controllers\Api\BrandController::class, 'index']);
    Route::get('brand/{slug}', [\App\Http\Controllers\Api\BrandController::class, 'getBySlug']);
 
+   Route::get('getAllGoods', [\App\Http\Controllers\Api\GoodController::class, 'getAllGoods']);
    Route::get('getRandomGoods', [\App\Http\Controllers\Api\GoodController::class, 'getRandomGoods']);
    Route::get('getBySlug/{slug}', [\App\Http\Controllers\Api\GoodController::class, 'getBySlug']);
    Route::get('getGoodsByCategory/{slug}', [\App\Http\Controllers\Api\GoodController::class, 'getGoodsByCategory']);
@@ -32,7 +33,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
    Route::post('convertPhoto', [\App\Http\Controllers\Api\ConvertPhotoController::class, 'convert']);
    Route::delete('destroy', [\App\Http\Controllers\Api\ConvertPhotoController::class, 'destroy']);
 
-   Route::post('/order', [\App\Http\Controllers\Api\OrderController::class, 'order'])->middleware('auth:sanctum');
+   Route::post('/order', [\App\Http\Controllers\Api\OrderController::class, 'order']);//->middleware('auth:sanctum');
 
    Route::post('logout', [App\Http\Controllers\Api\AuthController::class, 'logout']);
 

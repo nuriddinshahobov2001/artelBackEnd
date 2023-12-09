@@ -23,7 +23,6 @@
                 <th>#</th>
                 <th>Имя</th>
                 <th>Описание</th>
-                <th>Бренд</th>
                 <th>Цена</th>
                 <th>Действие</th>
                 </thead>
@@ -32,8 +31,7 @@
                     <tr>
                         <td>{{ $loop->iteration }}</td>
                         <td>{{ $good->name }}</td>
-                        <td>{{ $good->description }}</td>
-                        <td>{{ $good->brand?->name }}</td>
+                        <td>{{ Str::limit($good->description, 50) }}</td>
                         <td>{{ $good->price }}</td>
                         <td>
                             <a href="{{ route('good.show', $good->id) }}" class="btn btn-warning">

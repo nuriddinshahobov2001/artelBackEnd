@@ -13,15 +13,15 @@ return new class extends Migration
     {
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
-            $table->string('email');
+            $table->string('phone');
             $table->string( 'good_id');
             $table->integer('count');
             $table->decimal('price');
             $table->decimal('sale')->nullable();
-            $table->decimal('product_sum');
-            $table->boolean('delivery')->nullable();
-            $table->decimal('delivery_sum')->nullable();
-            $table->decimal('total_summa', 18, 2);
+            $table->text('comments')->nullable();
+            $table->text('address')->nullable();
+            $table->decimal('totalPrice', 18, 2);
+            $table->boolean('delivery')->default(false);
             $table->unsignedBigInteger('order_code');
             $table->timestamps();
         });

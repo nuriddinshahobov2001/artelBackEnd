@@ -3,17 +3,21 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Http\Resources\AllGoodsResource;
 use App\Http\Resources\GoodResource;
 use App\Http\Resources\SimilarGoodResource;
 use App\Models\Category;
 use App\Models\Good;
 use Illuminate\Http\JsonResponse;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Config;
-use Illuminate\Support\Facades\Http;
 
 class GoodController extends Controller
 {
+    public function getAllGoods()
+    {
+        return response()->json([
+            'goods' => AllGoodsResource::collection(Good::all())
+        ]);
+    }
     public function getRandomGoods(): JsonResponse
     {
         $goods = Good::query()->inRandomOrder()->limit(20)->get();
@@ -45,7 +49,7 @@ class GoodController extends Controller
     public function getGoodsByCategory($slug): JsonResponse
     {
         $category = Category::query()->where('slug', $slug)->first();
-        $goods = Good::where('category_id', $category?->category_id)->get();
+        $goods = Good::where('category_id', $category?->id)->get();
 
         return response()->json([
             'message' => true,
