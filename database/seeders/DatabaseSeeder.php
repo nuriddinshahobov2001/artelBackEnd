@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use App\Models\Brand;
 use App\Models\Category;
 use App\Models\Good;
 use App\Models\Image;
@@ -24,10 +25,13 @@ class DatabaseSeeder extends Seeder
              'password' => Hash::make('password')
          ]);
 
+         Brand::factory(10)->create();
+
          for ($i = 0; $i < 30; $i++) {
+             $image = 'http://192.168.1.44:8080/storage/good_img/6527b7d2c399b.png';
              if ($i >= 7) {
                  $parent_id = rand(1, 7);
-                 $image = 'http://192.168.1.44:8080/storage/good_img/6527b7d2c399b.png';
+                 $image = null;
              }
              Category::create([
                  'name' => fake()->name(),
@@ -52,9 +56,10 @@ class DatabaseSeeder extends Seeder
                  'description' => fake()->text,
                  'full_description' => json_encode($data),
                  'category_id' => $category_id,
-                 'price' => rand(1000, 10000),
+                 'price' => rand(100, 100000),
                  'count' => rand(1, 20),
                  'sale' => rand(15, 30),
+                 'brand_id' => rand(1, 10)
              ]);
 
              Image::updateOrInsert([

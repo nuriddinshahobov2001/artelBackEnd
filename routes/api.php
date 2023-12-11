@@ -29,6 +29,9 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
    Route::get('getBySlug/{slug}', [\App\Http\Controllers\Api\GoodController::class, 'getBySlug']);
    Route::get('getGoodsByCategory/{slug}', [\App\Http\Controllers\Api\GoodController::class, 'getGoodsByCategory']);
    Route::get('getSimilarProducts/{categorySlug}/{goodSlug}', [\App\Http\Controllers\Api\GoodController::class, 'getSimilarProducts']);
+   Route::get('getHitProducts', [\App\Http\Controllers\Api\GoodController::class, 'getHitProducts']);
+   Route::get('getSaleProducts', [\App\Http\Controllers\Api\GoodController::class, 'getSaleProducts']);
+   Route::get('getSeasonalProducts', [\App\Http\Controllers\Api\GoodController::class, 'getSeasonalProducts']);
 
    Route::post('convertPhoto', [\App\Http\Controllers\Api\ConvertPhotoController::class, 'convert']);
    Route::delete('destroy', [\App\Http\Controllers\Api\ConvertPhotoController::class, 'destroy']);

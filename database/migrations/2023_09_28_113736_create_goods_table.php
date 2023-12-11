@@ -24,6 +24,9 @@ return new class extends Migration
             $table->decimal('sale')->nullable();
             $table->integer('count')->nullable();
             $table->string('present')->nullable();
+            $table->boolean('is_hit')->default(false);
+            $table->boolean('is_sale')->default(false);
+            $table->boolean('is_seasonal')->default(false);
             $table->timestamps();
         });
     }
