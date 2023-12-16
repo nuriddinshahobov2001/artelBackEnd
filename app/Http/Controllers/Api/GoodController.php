@@ -78,4 +78,31 @@ class GoodController extends Controller
             'goods' => SimilarGoodResource::collection($goods)
         ]);
     }
+
+    public function getHitProducts(): JsonResponse
+    {
+        $goods = Good::where('is_hit', true)->get();
+
+        return response()->json([
+            'goods' => GoodResource::collection($goods)
+        ]);
+    }
+
+    public function getSaleProducts(): JsonResponse
+    {
+        $goods = Good::where('is_sale', true)->get();
+
+        return response()->json([
+            'goods' => GoodResource::collection($goods)
+        ]);
+    }
+
+    public function getSeasonalProducts(): JsonResponse
+    {
+        $goods = Good::where('is_seasonal', true)->get();
+
+        return response()->json([
+            'goods' => GoodResource::collection($goods)
+        ]);
+    }
 }

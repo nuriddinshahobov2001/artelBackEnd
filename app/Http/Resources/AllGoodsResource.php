@@ -18,7 +18,6 @@ class AllGoodsResource extends JsonResource
             'id' => $this->id,
             'name' => $this->name,
             'slug' => $this->slug,
-            'description' => json_decode($this->description)
         ];
     }
 }

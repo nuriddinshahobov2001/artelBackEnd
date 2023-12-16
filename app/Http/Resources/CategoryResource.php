@@ -16,20 +16,20 @@ class CategoryResource extends JsonResource
      */
     public function toArray(Request $request): array
     {
-        $childCategories = $this->child($this->category_id);
+        $childCategories = $this->child($this->id);
 
         return [
-            'category_id' => $this->category_id,
-            'name' => $this->getParentCategory($this->category_id)['name'],
+            'category_id' => $this->id,
+            'name' => $this->getParentCategory($this->id)['name'],
             'slug' => $this->slug,
-            'image' => Storage::url($this->image),
+            'image' => $this->image,
             'child' => $childCategories
         ];
     }
 
     public function getParentCategory($ID)
     {
-        return Category::where('category_id', $ID)->where('parent_id', '=', null)->select('name')->first();
+        return Category::where('id', $ID)->where('parent_id', '=', null)->select('name')->first();
     }
 
 
