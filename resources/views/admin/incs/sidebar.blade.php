@@ -58,6 +58,13 @@
                 </a>
             </li>
             <li
+                class="sidebar-item {{ (request()->is('orders') or request()->is('orders/*')) ? 'active' : '' }}">
+                <a href="{{ route('orders.index') }}" class='sidebar-link'>
+                    <i class="bi bi-grid-fill"></i>
+                    <span>Заказы</span>
+                </a>
+            </li>
+            <li
                 class="sidebar-item {{ (request()->is('goodsWithDefects') or request()->is('goodsWithDefects/*')) ? 'active' : '' }}">
                 <a href="{{ route('goodsWithDefects') }}" class='sidebar-link'>
                     <i class="bi bi-grid-fill"></i>

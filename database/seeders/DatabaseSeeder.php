@@ -63,5 +63,7 @@ class DatabaseSeeder extends Seeder
                  'is_main' => 1
              ]);
          }
+
+         $this->call(OrderStatusSeeder::class);
     }
 }

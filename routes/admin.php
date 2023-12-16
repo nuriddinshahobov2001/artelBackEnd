@@ -27,6 +27,14 @@ Route::middleware('auth')->group(function () {
    Route::get('goodsWithDefects', [\App\Http\Controllers\GoodController::class, 'goodsWithDefects'])->name('goodsWithDefects');
    Route::get('goodsWithDefects/{slug}', [\App\Http\Controllers\GoodController::class, 'showGoodsWithDefects'])->name('showGoodsWithDefects');
 
+   Route::group(['as' => 'orders.'], function () {
+       Route::get('orders', [\App\Http\Controllers\OrderController::class, 'index'])->name('index');
+       Route::get('orders/show/{orderCode}', [\App\Http\Controllers\OrderController::class, 'show'])->name('show');
+       Route::post('/orders/accept/{orderCode}', [\App\Http\Controllers\OrderController::class, 'acceptOrder'])->name('acceptOrder');
+       Route::post('/orders/reject/{orderCode}', [\App\Http\Controllers\OrderController::class, 'rejectOrder'])->name('rejectOrder');
+
+   });
+
     Route::get('get/goods/excel', [\App\Http\Controllers\ExcelController::class, 'excel'])->name('excel');
 
 });
