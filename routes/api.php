@@ -29,7 +29,7 @@ Route::middleware('auth.basic')->group(function () {
     Route::get('getBySlug/{slug}', [\App\Http\Controllers\Api\GoodController::class, 'getBySlug']);
     Route::get('getGoodsByCategory/{slug}', [\App\Http\Controllers\Api\GoodController::class, 'getGoodsByCategory']);
     Route::get('getSimilarProducts/{categorySlug}/{goodSlug}', [\App\Http\Controllers\Api\GoodController::class, 'getSimilarProducts']);
-    
+
     Route::post('convertPhoto', [\App\Http\Controllers\Api\ConvertPhotoController::class, 'convert']);
     Route::delete('destroy', [\App\Http\Controllers\Api\ConvertPhotoController::class, 'destroy']);
 
