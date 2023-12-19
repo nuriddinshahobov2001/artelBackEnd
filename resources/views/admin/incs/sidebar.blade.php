@@ -72,6 +72,13 @@
                     <span>Товари с недостатками</span>
                 </a>
             </li>
+            <li
+                class="sidebar-item {{ (request()->is('change_password') or request()->is('change_password/*')) ? 'active' : '' }}">
+                <a href="{{ route('change_password.index') }}" class='sidebar-link'>
+                    <i class="bi bi-grid-fill"></i>
+                    <span>Изменить пароль</span>
+                </a>
+            </li>
             <li class="sidebar-item">
                 <hr>
                 <a href="{{ route('logout') }}" class='sidebar-link'>
@@ -86,6 +93,13 @@
                 <a href="{{ route('orders.index') }}" class='sidebar-link'>
                     <i class="bi bi-grid-fill"></i>
                     <span>Заказы</span>
+                </a>
+            </li>
+            <li
+                class="sidebar-item {{ (request()->is('change_password') or request()->is('change_password/*')) ? 'active' : '' }}">
+                <a href="{{ route('change_password.index') }}" class='sidebar-link'>
+                    <i class="bi bi-grid-fill"></i>
+                    <span>Изменить пароль</span>
                 </a>
             </li>
             <li class="sidebar-item">
