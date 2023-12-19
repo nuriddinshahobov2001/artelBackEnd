@@ -7,6 +7,7 @@ use App\Models\Brand;
 use App\Models\Category;
 use App\Models\Good;
 use App\Models\Image;
+use App\Models\User;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
@@ -18,12 +19,16 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
+        $this->call([
+            OrderStatusSeeder::class,
+            CreateRoleSeeder::class
+        ]);
 
-         \App\Models\User::factory()->create([
+         User::factory()->create([
              'name' => 'Admin',
              'email' => 'admin@gmail.com',
              'password' => Hash::make('password')
-         ]);
+         ])->assignRole('admin');
 
          Brand::factory(10)->create();
 
@@ -68,7 +73,5 @@ class DatabaseSeeder extends Seeder
                  'is_main' => 1
              ]);
          }
-
-         $this->call(OrderStatusSeeder::class);
     }
 }
