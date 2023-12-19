@@ -37,7 +37,11 @@ Route::middleware('checkRole:admin|consultant')->group(function () {
         Route::get('orders/show/{orderCode}', [\App\Http\Controllers\OrderController::class, 'show'])->name('show');
         Route::post('/orders/accept/{orderCode}', [\App\Http\Controllers\OrderController::class, 'acceptOrder'])->name('acceptOrder');
         Route::post('/orders/reject/{orderCode}', [\App\Http\Controllers\OrderController::class, 'rejectOrder'])->name('rejectOrder');
+    });
 
+    Route::group(['as' => 'change_password.'], function () {
+        Route::get('/change_password', [\App\Http\Controllers\PasswordController::class, 'index'])->name('index');
+        Route::post('/change_password', [\App\Http\Controllers\PasswordController::class, 'store'])->name('store');
     });
 
 });

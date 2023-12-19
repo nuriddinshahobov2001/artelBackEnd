@@ -22,8 +22,5 @@ Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
-Route::get('/change_password', [\App\Http\Controllers\PasswordController::class, 'index'])->name('change_password.index');
-Route::post('/change_password', [\App\Http\Controllers\PasswordController::class, 'store'])->name('change_password.store');
-
 require __DIR__.'/auth.php';
 require __DIR__.'/admin.php';
