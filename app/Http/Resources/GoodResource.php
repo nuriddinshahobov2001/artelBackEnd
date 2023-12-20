@@ -33,6 +33,8 @@ class GoodResource extends JsonResource
             'count' => $this->count,
             'brand' => $this->brand?->name,
             'brand_slug' => $this->brand?->slug,
+            'category' => $this->category?->name,
+            'category_slug' => $this->category?->slug,
             'image' => $image,
             'images' => $this->all_images($this->good_id),
         ];

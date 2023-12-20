@@ -55,7 +55,8 @@ class DatabaseSeeder extends Seeder
                  fake()->title => fake()->name
              ];
 
-             $category_id = rand(1, 20);
+             $category_id = '00-000000'.rand(1, 20);
+             $brand_id = '00-000000'.rand(1, 10);
              $good = Good::create([
                  'good_id' => '00-000000'.$c,
                  'name' => fake()->name(),
@@ -66,7 +67,7 @@ class DatabaseSeeder extends Seeder
                  'price' => rand(100, 100000),
                  'count' => rand(1, 20),
                  'sale' => rand(15, 30),
-                 'brand_id' => rand(1, 10)
+                 'brand_id' => $brand_id
              ]);
 
              $c += 1;
