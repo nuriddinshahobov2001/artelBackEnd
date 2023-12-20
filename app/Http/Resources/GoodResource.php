@@ -36,19 +36,16 @@ class GoodResource extends JsonResource
             'category' => $this->category?->name,
             'category_slug' => $this->category?->slug,
             'image' => $image,
-            'images' => $this->all_images($this->good_id),
+            'images' => $this->all_images(),
         ];
     }
-    public function all_images($id)
+    public function all_images()
     {
         $images = array();
-        $good_imgs = Image::where([
-            ['good_id', $id],
-            ['is_main', '!==', 1]
-        ])->get();
-
-        foreach ($good_imgs as $img) {
-            $images[] = $img->image;
+        foreach ($this->images as $img) {
+            if($img->is_main != 1) {
+                $images[] = $img->image;
+            }
         }
         return $images;
     }

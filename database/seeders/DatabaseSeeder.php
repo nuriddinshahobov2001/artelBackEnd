@@ -48,10 +48,10 @@ class DatabaseSeeder extends Seeder
          }
 
          $c = 1;
-         $is_hit = 0;
-         $is_sale = 0;
-         $is_seasonal = 0;
          for ($i = 0; $i < 1000; $i++) {
+             $is_hit = 0;
+             $is_sale = 0;
+             $is_seasonal = 0;
              $data = [
                  fake()->title => fake()->name,
                  fake()->title => fake()->name,
