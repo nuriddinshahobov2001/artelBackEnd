@@ -33,7 +33,7 @@ class DatabaseSeeder extends Seeder
          Brand::factory(10)->create();
 
          for ($i = 0; $i < 30; $i++) {
-             $image = 'http://192.168.1.44:8080/storage/good_img/6527b7d2c399b.png';
+             $image = 'http://artel-admin.fingroup.tj/storage/good_img/6582be8d9c4e1.png';
              if ($i >= 7) {
                  $parent_id = '00-000000'.rand(1, 7);
                  $image = null;
