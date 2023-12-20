@@ -48,12 +48,23 @@ class DatabaseSeeder extends Seeder
          }
 
          $c = 1;
+         $is_hit = 0;
+         $is_sale = 0;
+         $is_seasonal = 0;
          for ($i = 0; $i < 1000; $i++) {
              $data = [
                  fake()->title => fake()->name,
                  fake()->title => fake()->name,
                  fake()->title => fake()->name
              ];
+
+             if ($i < 20) {
+                 $is_hit = 1;
+             } elseif ($i > 20 && $i < 40) {
+                 $is_sale = 1;
+             } elseif ($i > 40 && $i < 60) {
+                 $is_seasonal = 1;
+             }
 
              $category_id = '00-000000'.rand(1, 20);
              $brand_id = '00-000000'.rand(1, 10);
@@ -67,7 +78,10 @@ class DatabaseSeeder extends Seeder
                  'price' => rand(100, 100000),
                  'count' => rand(1, 20),
                  'sale' => rand(15, 30),
-                 'brand_id' => $brand_id
+                 'brand_id' => $brand_id,
+                 'is_hit' => $is_hit,
+                 'is_sale' => $is_sale,
+                 'is_seasonal' => $is_seasonal
              ]);
 
              $c += 1;
