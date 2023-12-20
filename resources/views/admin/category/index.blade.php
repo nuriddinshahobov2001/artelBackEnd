@@ -30,7 +30,7 @@
                     <tr>
                         <td>{{ $loop->iteration }}</td>
                         <td>{{ $category->name }}</td>
-                        <td><img src="{{ \Illuminate\Support\Facades\Storage::url($category->image) }}" alt=""
+                        <td><img src="{{ $category->image }}" alt=""
                                  width="50"></td>
                         <td>
                             <a href="#" role="button" class="btn btn-danger"

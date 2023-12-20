@@ -35,18 +35,19 @@ class DatabaseSeeder extends Seeder
          for ($i = 0; $i < 30; $i++) {
              $image = 'http://192.168.1.44:8080/storage/good_img/6527b7d2c399b.png';
              if ($i >= 7) {
-                 $parent_id = rand(1, 7);
+                 $parent_id = '00-000000'.rand(1, 7);
                  $image = null;
              }
              Category::create([
                  'name' => fake()->name(),
-                 'category_id' => rand(1000, 2000),
+                 'category_id' => '00-000000'.rand(1, 30),
                  'slug' => Str::slug(fake()->name()),
                  'parent_id' => $parent_id ?? null,
                  'image' => $image ?? null
              ]);
          }
 
+         $c = 1;
          for ($i = 0; $i < 1000; $i++) {
              $data = [
                  fake()->title => fake()->name,
@@ -56,6 +57,7 @@ class DatabaseSeeder extends Seeder
 
              $category_id = rand(1, 20);
              $good = Good::create([
+                 'good_id' => '00-000000'.$c,
                  'name' => fake()->name(),
                  'slug' => Str::slug(fake()->name()),
                  'description' => fake()->text,
@@ -67,8 +69,10 @@ class DatabaseSeeder extends Seeder
                  'brand_id' => rand(1, 10)
              ]);
 
+             $c += 1;
+
              Image::updateOrInsert([
-                 'good_id' => $good->id,
+                 'good_id' => $good->good_id,
                  'image' => 'http://192.168.1.44:8080/storage/good_img/6527b8d7c3f03.png',
                  'is_main' => 1
              ]);

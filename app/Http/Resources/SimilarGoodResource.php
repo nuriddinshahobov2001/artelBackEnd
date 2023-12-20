@@ -22,7 +22,7 @@ class SimilarGoodResource extends JsonResource
         }
 
         return [
-            'id' => $this->id,
+            'id' => $this->good_id,
             'name' => $this->name,
             'slug' => $this->slug,
             'sale' => $this->sale,

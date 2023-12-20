@@ -45,12 +45,13 @@ class ImageService
     public function get($images)
     {
         try {
-            DB::table('images')->truncate();
+//            DB::table('images')->truncate();
             foreach ($images as $image) {
-                Image::create([
-                    'good_id' => $image['good_id'],
-                    'image' => $image['image']
-                ]);
+                Image::updateOrCreate(
+                    ['good_id' => $image['good_id']],
+                    [
+                        'image' => $image['image']
+                    ]);
             }
 
             return true;

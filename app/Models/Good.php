@@ -13,7 +13,7 @@ class Good extends Model
 
     public function brand()
     {
-        return $this->belongsTo(Brand::class, 'brand_id', 'id');
+        return $this->belongsTo(Brand::class, 'brand_id', 'brand_id');
     }
 
     public function category()
@@ -23,7 +23,7 @@ class Good extends Model
 
     public function images()
     {
-        return $this->hasMany(Image::class, 'good_id', 'id');
+        return $this->hasMany(Image::class, 'good_id', 'good_id');
     }
 
     public function scopeFilter($query)

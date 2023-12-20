@@ -62,9 +62,9 @@ class OrderService
     public function show(string $orderCode)
     {
         return DB::table('orders as o')
-            ->select('g.name', 'o.count', 'o.price', 'o.sale', 'o.status_id', 'order_code')
+            ->select('g.name', 'o.count', 'o.price', 'o.sale', 'o.status_id', 'o.order_code')
             ->join('goods as g', 'g.good_id', '=', 'o.good_id')
-            ->where('order_code', $orderCode)
+            ->where('o.order_code', $orderCode)
             ->get();
     }
 

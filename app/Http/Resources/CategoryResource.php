@@ -16,11 +16,11 @@ class CategoryResource extends JsonResource
      */
     public function toArray(Request $request): array
     {
-        $childCategories = $this->child($this->id);
+        $childCategories = $this->child($this->category_id);
 
         return [
-            'category_id' => $this->id,
-            'name' => $this->getParentCategory($this->id)['name'],
+            'category_id' => $this->category_id,
+            'name' => $this->getParentCategory($this->category_id)['name'],
             'slug' => $this->slug,
             'image' => $this->image,
             'child' => $childCategories
@@ -29,7 +29,7 @@ class CategoryResource extends JsonResource
 
     public function getParentCategory($ID)
     {
-        return Category::where('id', $ID)->where('parent_id', '=', null)->select('name')->first();
+        return Category::where('category_id', $ID)->where('parent_id', '=', null)->select('name')->first();
     }
 
 

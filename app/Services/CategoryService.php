@@ -48,15 +48,16 @@ class CategoryService
     public function get($categories)
     {
         try {
-            DB::table('categories')->truncate();
+//            DB::table('categories')->truncate();
             foreach ($categories as $category) {
-                Category::updateOrCreate([
-                    'category_id' => $category['id'],
-                    'name' => $category['name'],
-                    'slug' => Str::slug($category['name'] . '-' . Str::random(5), '-'),
-                    'parent_id' => $category['parent_id'],
-                    'image' => $category['img']
-                ]);
+                Category::updateOrCreate(
+                    ['category_id' => $category['id']],
+                    [
+                        'name' => $category['name'],
+                        'slug' => Str::slug($category['name'] . '-' . Str::random(5), '-'),
+                        'parent_id' => $category['parent_id'],
+                        'image' => $category['img']
+                    ]);
             }
 
             return true;

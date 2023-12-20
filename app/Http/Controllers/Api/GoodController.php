@@ -49,7 +49,7 @@ class GoodController extends Controller
     public function getGoodsByCategory($slug): JsonResponse
     {
         $category = Category::query()->where('slug', $slug)->first();
-        $goods = Good::where('category_id', $category?->id)->get();
+        $goods = Good::where('category_id', $category->category_id)->get();
 
         return response()->json([
             'message' => true,
