@@ -18,7 +18,7 @@ class ImageController extends Controller
 
     public function get(): JsonResponse
     {
-        $response = Http::timeout(60)->withHeaders([
+        $response = Http::withHeaders([
            'Content-Type' => 'application/json; charset=utf-8'
         ])->withBasicAuth(
             Config::get('constants.credentials.login'),

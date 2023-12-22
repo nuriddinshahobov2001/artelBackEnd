@@ -37,7 +37,6 @@ class GoodController extends Controller
     public function getBySlug($slug): JsonResponse
     {
         $good = Good::query()
-            ->filer()
             ->with('brand', 'category', 'images')
             ->where('slug', $slug)
             ->first();
@@ -60,8 +59,14 @@ class GoodController extends Controller
         $category = Category::query()
             ->where('slug', $slug)
             ->first();
-        $goods = Good::filter()
-            ->with('brand', 'category', 'images')
+        if (!$category) {
+            return response()->json([
+                'message' => false
+            ]);
+        }
+//        dd($category);
+        $goods = Good:://filter()
+            with('category', 'images')
             ->where('category_id', $category->category_id)
             ->get();
 
