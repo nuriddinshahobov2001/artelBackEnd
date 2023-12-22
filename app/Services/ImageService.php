@@ -50,7 +50,8 @@ class ImageService
                 Image::updateOrCreate(
                     ['good_id' => $image['good_id']],
                     [
-                        'image' => $image['image']
+                        'image' => $image['image'],
+                        'is_main' => $image['is_main']
                     ]);
             }
 

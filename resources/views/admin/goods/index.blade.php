@@ -33,7 +33,7 @@
                         <td>{{ $good->name }}</td>
                         <td>{{ Str::limit($good->description, 50) }}</td>
                         <td>{{ $good->price }}</td>
-                        <td>
+                        <td width="200px">
                             <a href="{{ route('good.show', $good->id) }}" class="btn btn-warning">
                                 <i class="bi bi-eye"></i>
                             </a>

@@ -30,67 +30,67 @@ class DatabaseSeeder extends Seeder
              'password' => Hash::make('password')
          ])->assignRole('admin');
 
-         Brand::factory(10)->create();
-
-         for ($i = 0; $i < 30; $i++) {
-             $image = 'http://artel-admin.fingroup.tj/storage/good_img/6582be8d9c4e1.png';
-             if ($i >= 7) {
-                 $parent_id = '00-000000'.rand(1, 7);
-                 $image = null;
-             }
-             Category::create([
-                 'name' => fake()->name(),
-                 'category_id' => '00-000000'.rand(1, 30),
-                 'slug' => Str::slug(fake()->name()),
-                 'parent_id' => $parent_id ?? null,
-                 'image' => $image ?? null
-             ]);
-         }
-
-         $c = 1;
-         for ($i = 0; $i < 1000; $i++) {
-             $is_hit = 0;
-             $is_sale = 0;
-             $is_seasonal = 0;
-             $data = [
-                 fake()->title => fake()->name,
-                 fake()->title => fake()->name,
-                 fake()->title => fake()->name
-             ];
-
-             if ($i < 20) {
-                 $is_hit = 1;
-             } elseif ($i > 20 && $i < 40) {
-                 $is_sale = 1;
-             } elseif ($i > 40 && $i < 60) {
-                 $is_seasonal = 1;
-             }
-
-             $category_id = '00-000000'.rand(1, 20);
-             $brand_id = '00-000000'.rand(1, 10);
-             $good = Good::create([
-                 'good_id' => '00-000000'.$c,
-                 'name' => fake()->name(),
-                 'slug' => Str::slug(fake()->name()),
-                 'description' => fake()->text,
-                 'full_description' => json_encode($data),
-                 'category_id' => $category_id,
-                 'price' => rand(100, 100000),
-                 'count' => rand(1, 20),
-                 'sale' => rand(15, 30),
-                 'brand_id' => $brand_id,
-                 'is_hit' => $is_hit,
-                 'is_sale' => $is_sale,
-                 'is_seasonal' => $is_seasonal
-             ]);
-
-             $c += 1;
-
-             Image::updateOrInsert([
-                 'good_id' => $good->good_id,
-                 'image' => 'http://192.168.1.44:8080/storage/good_img/6527b8d7c3f03.png',
-                 'is_main' => 1
-             ]);
-         }
+//         Brand::factory(10)->create();
+//
+//         for ($i = 0; $i < 30; $i++) {
+//             $image = 'http://artel-admin.fingroup.tj/storage/good_img/6582be8d9c4e1.png';
+//             if ($i >= 7) {
+//                 $parent_id = '00-000000'.rand(1, 7);
+//                 $image = null;
+//             }
+//             Category::create([
+//                 'name' => fake()->name(),
+//                 'category_id' => '00-000000'.rand(1, 30),
+//                 'slug' => Str::slug(fake()->name()),
+//                 'parent_id' => $parent_id ?? null,
+//                 'image' => $image ?? null
+//             ]);
+//         }
+//
+//         $c = 1;
+//         for ($i = 0; $i < 1000; $i++) {
+//             $is_hit = 0;
+//             $is_sale = 0;
+//             $is_seasonal = 0;
+//             $data = [
+//                 fake()->title => fake()->name,
+//                 fake()->title => fake()->name,
+//                 fake()->title => fake()->name
+//             ];
+//
+//             if ($i < 20) {
+//                 $is_hit = 1;
+//             } elseif ($i > 20 && $i < 40) {
+//                 $is_sale = 1;
+//             } elseif ($i > 40 && $i < 60) {
+//                 $is_seasonal = 1;
+//             }
+//
+//             $category_id = '00-000000'.rand(1, 20);
+//             $brand_id = '00-000000'.rand(1, 10);
+//             $good = Good::create([
+//                 'good_id' => '00-000000'.$c,
+//                 'name' => fake()->name(),
+//                 'slug' => Str::slug(fake()->name()),
+//                 'description' => fake()->text,
+//                 'full_description' => json_encode($data),
+//                 'category_id' => $category_id,
+//                 'price' => rand(100, 100000),
+//                 'count' => rand(1, 20),
+//                 'sale' => rand(15, 30),
+//                 'brand_id' => $brand_id,
+//                 'is_hit' => $is_hit,
+//                 'is_sale' => $is_sale,
+//                 'is_seasonal' => $is_seasonal
+//             ]);
+//
+//             $c += 1;
+//
+//             Image::updateOrInsert([
+//                 'good_id' => $good->good_id,
+//                 'image' => 'http://192.168.1.44:8080/storage/good_img/6527b8d7c3f03.png',
+//                 'is_main' => 1
+//             ]);
+//         }
     }
 }
