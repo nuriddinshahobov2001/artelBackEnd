@@ -20,7 +20,7 @@ class CategoryController extends Controller
 
     public function get(): JsonResponse
     {
-        $response = Http::withHeaders([
+        $response = Http::timeout(60)->withHeaders([
            'Content-Type' => 'application/json; charset=utf-8'
             ])->withBasicAuth(
                 Config::get('constants.credentials.login'),
