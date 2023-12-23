@@ -68,9 +68,9 @@ class GoodController extends Controller
                 'message' => false
             ]);
         }
-//        dd($category);
-        $goods = Good:://filter()
-            with('category', 'images')
+
+        $goods = Good::filter()
+            ->with('category', 'images')
             ->where('category_id', $category->category_id)
             ->get();
 
