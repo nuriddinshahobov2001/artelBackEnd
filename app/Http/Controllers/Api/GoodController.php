@@ -124,7 +124,7 @@ class GoodController extends Controller
 
     public function getSaleProducts(): JsonResponse
     {
-        $goods = Good::filer()
+        $goods = Good::filter()
             ->with('brand', 'category', 'images')
             ->where('is_sale', '=',true)
             ->get();
