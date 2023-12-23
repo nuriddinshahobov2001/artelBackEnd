@@ -53,7 +53,7 @@ class GoodService
                         'name' => $good['name'],
                         'slug' => Str::slug($good['name'] . '-' . Str::random(5), '-'),
                         'description' => $good['description'],
-                        'full_description' => json_encode($good['description']) ?? null,
+                        'full_description' => json_encode($good['full_description']) ?? null,
 //                        'full_description' => json_encode($good['full_description']) ?? null,
                         'category_id' => $good['category_id'],
                         'brand_id' => $good['brand_id'],
