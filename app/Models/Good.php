@@ -8,6 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 class Good extends Model
 {
     use HasFactory;
+    protected $casts = [
+        'full_description' => 'json'
+    ];
 
     protected $guarded = false;
 

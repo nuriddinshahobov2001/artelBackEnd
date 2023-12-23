@@ -39,6 +39,7 @@ class GoodResource extends JsonResource
             'images' => $this->all_images(),
         ];
     }
+    
     public function all_images()
     {
         $images = array();
