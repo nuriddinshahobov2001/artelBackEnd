@@ -15,7 +15,11 @@ class GoodController extends Controller
     public function getAllGoods()
     {
         return response()->json([
-            'goods' => AllGoodsResource::collection(Good::filter()->select('good_id', 'name', 'slug')->get())
+            'goods' => AllGoodsResource::collection(
+                Good::filter()
+                    ->select('good_id', 'name', 'slug')
+                    ->get()
+            )
         ]);
     }
     public function getRandomGoods(): JsonResponse
@@ -91,7 +95,7 @@ class GoodController extends Controller
         }
 
         $goods = Good::query()
-            ->filter()
+//            ->filter()
             ->with('images')
             ->where([
                 ['category_id', $category->category_id],
