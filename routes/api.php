@@ -31,6 +31,7 @@ Route::middleware('auth.basic')->group(function () {
    Route::get('getRandomGoods', [\App\Http\Controllers\Api\GoodController::class, 'getRandomGoods']);
    Route::get('getBySlug/{slug}', [\App\Http\Controllers\Api\GoodController::class, 'getBySlug']);
    Route::get('getGoodsByCategory/{slug}', [\App\Http\Controllers\Api\GoodController::class, 'getGoodsByCategory']);
+   Route::get('getGoodsByParentCategory/{slug}', [\App\Http\Controllers\Api\GoodController::class, 'getGoodsByParentCategory']);
    Route::get('getSimilarProducts/{categorySlug}/{goodSlug}', [\App\Http\Controllers\Api\GoodController::class, 'getSimilarProducts']);
    Route::get('getHitProducts', [\App\Http\Controllers\Api\GoodController::class, 'getHitProducts']);
    Route::get('getSaleProducts', [\App\Http\Controllers\Api\GoodController::class, 'getSaleProducts']);
