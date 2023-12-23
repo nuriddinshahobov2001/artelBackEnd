@@ -95,7 +95,7 @@ class GoodController extends Controller
         }
 
         $goods = Good::query()
-//            ->filter()
+            ->filter()
             ->with('images')
             ->where([
                 ['category_id', $category->category_id],
