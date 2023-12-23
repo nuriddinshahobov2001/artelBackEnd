@@ -17,7 +17,7 @@ class SimilarGoodResource extends JsonResource
         $image = null;
         foreach ($this->images as $img){
             if ($img->is_main === 1) {
-                $image = $img->img_url;
+                $image = $img->image;
             }
         }
 
