@@ -43,9 +43,11 @@
 
                 <div class="col-7" >
                     <label>Полное описание</label>
+                    @if(is_array($good->full_description))
                     <textarea class="form-control" cols="30" rows="3" disabled
                             >@foreach(json_decode($good->full_description) as $item) @foreach($item as $key => $value){{ $key }}: {{ $value . "\n" }} @endforeach @endforeach
                     </textarea>
+                    @endif
                 </div>
             </div>
         </div>

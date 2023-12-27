@@ -29,6 +29,8 @@ Route::middleware('checkRole:admin')->group(function () {
 
     Route::get('get/goods/excel', [\App\Http\Controllers\ExcelController::class, 'excel'])->name('excel');
 
+    Route::get('report/goods', [\App\Http\Controllers\ExcelController::class, 'GoodReport'])->name('report.goods');
+
 });
 
 Route::middleware('checkRole:admin|consultant')->group(function () {
@@ -36,6 +38,7 @@ Route::middleware('checkRole:admin|consultant')->group(function () {
         Route::get('orders', [\App\Http\Controllers\OrderController::class, 'index'])->name('index');
         Route::get('orders/show/{orderCode}', [\App\Http\Controllers\OrderController::class, 'show'])->name('show');
         Route::post('/orders/accept/{orderCode}', [\App\Http\Controllers\OrderController::class, 'acceptOrder'])->name('acceptOrder');
+        Route::post('/orders/complete/{orderCode}', [\App\Http\Controllers\OrderController::class, 'complete'])->name('completeOrder');
         Route::post('/orders/reject/{orderCode}', [\App\Http\Controllers\OrderController::class, 'rejectOrder'])->name('rejectOrder');
     });
 
@@ -43,6 +46,8 @@ Route::middleware('checkRole:admin|consultant')->group(function () {
         Route::get('/change_password', [\App\Http\Controllers\PasswordController::class, 'index'])->name('index');
         Route::post('/change_password', [\App\Http\Controllers\PasswordController::class, 'store'])->name('store');
     });
+
+
 
 });
 
