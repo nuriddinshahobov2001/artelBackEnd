@@ -62,7 +62,6 @@ class OrderService
 
     public function show(string $orderCode)
     {
-
          return  DB::table('orders as o')
              ->leftJoin('goods as g', 'g.id', '=', 'o.good_id')
              ->select('g.name', 'o.count', 'o.price', 'o.sale', 'o.status_id', 'o.order_code')

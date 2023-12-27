@@ -65,6 +65,28 @@ class ExcelController extends Controller
             ->withCount('orders')
             ->get();
 
+        $f = Good::query()
+            ->select(
+                'goods.name',
+                'c.name as category',
+                'goods.price',
+                DB::raw('COUNT(orders.id) as total_orders'),
+                DB::raw('SUM(CASE WHEN orders.status_id = 3 THEN 1 ELSE 0 END) as completed_orders'),
+                DB::raw('SUM(CASE WHEN orders.status_id = 1 THEN 1 ELSE 0 END) as pending_orders'),
+                DB::raw('SUM(CASE WHEN orders.status_id = 4 THEN 1 ELSE 0 END) as rejected_orders')
+            )
+            ->leftJoin('categories as c', 'c.id', '=', 'goods.category_id')
+            ->leftJoin('orders', 'orders.good_id', '=', 'goods.id')
+            ->groupBy('goods.id', 'c.name', 'goods.name', 'goods.price')
+            ->orderByDesc('total_orders')
+            ->withCount('orders')
+            ->get();
+
+        dump($f);
+
+        dd($goods);
+
+
 
 
 
