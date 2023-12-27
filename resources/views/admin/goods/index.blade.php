@@ -17,6 +17,9 @@
         <a href="{{ route('good.get') }}" class="btn btn-outline-success">
             Загрузить
         </a>
+        <a href="{{ route('report.goods') }}" class="btn btn-outline-danger">
+            Отчет товаров
+        </a>
         <div class="col-12">
             <table class="table">
                 <thead>

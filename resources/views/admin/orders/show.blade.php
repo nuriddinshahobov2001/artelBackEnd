@@ -5,8 +5,9 @@
         <div>
             <a href="{{ route('orders.index') }}" class="btn btn-outline-danger">Назад</a>
             @if($goods[0]->status_id == 1)
-                <a href="#" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#acceptOrder">Одобрить</a>
+                <a href="#" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#acceptOrder">Завершить</a>
             @endif
+
             @if($goods[0]->status_id == 1 || $goods[0]->status_id == 2)
                <a href="#" class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#rejectOrder">Отклонить</a>
             @endif
@@ -45,7 +46,7 @@
                     <h5 class="modal-title" id="exampleModalLabel">Одобрение заказа</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Закрыть"></button>
                 </div>
-                <form action="{{route('orders.acceptOrder', $goods[0]->order_code)}}" method="POST">
+                <form action="{{route('orders.completeOrder', $goods[0]->order_code)}}" method="POST">
                     @csrf
 
                     <div class="modal-body">
