@@ -167,28 +167,4 @@ class GoodController extends Controller
             'goods' => GoodResource::collection($goods)
         ]);
     }
-
-    public function getGoodsByParentCategory($slug)
-    {
-        $category = Category::where('slug', $slug)->first();
-
-        $goods = Good::select('goods.*')
-            ->join('categories', 'categories.category_id', '=', 'goods.category_id')
-            ->where([
-                ['categories.parent_id', $category->category_id],
-                ['goods.category_id', '!=', null],
-                ['goods.price', '!=', 0],
-                ['goods.name', '!=', ''],
-                ['goods.description', '!=', ''],
-                ['goods.full_description', '!=', '[]']
-            ])
-            ->whereHas('images', function ($query) {
-                $query->where('is_main', true);
-            })->get();
-
-        return response()->json([
-            'message' => true,
-            'goods' => GoodResource::collection($goods)
-        ]);
-    }
 }
