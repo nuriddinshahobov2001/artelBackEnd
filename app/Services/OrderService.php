@@ -37,12 +37,12 @@ class OrderService
             }
             DB::commit();
 
-            Http::withHeaders([
-               'Content-Type' => 'application/json; charset=utf-8'
-            ])->withBasicAuth(
-                Config::get('constants.credentials.login'),
-                Config::get('constants.credentials.password')
-            )->post(Config::get('constants.api.order'), $order);
+//            Http::withHeaders([
+//               'Content-Type' => 'application/json; charset=utf-8'
+//            ])->withBasicAuth(
+//                Config::get('constants.credentials.login'),
+//                Config::get('constants.credentials.password')
+//            )->post(Config::get('constants.api.order'), $order);
 
             return true;
         } catch (\Exception $e) {

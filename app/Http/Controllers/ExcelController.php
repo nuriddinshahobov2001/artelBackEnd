@@ -12,7 +12,6 @@ class ExcelController extends Controller
 {
     public function excel()
     {
-
         $goods = Good::unFilter()->get();
 
         $fileName = uniqid();
@@ -59,7 +58,7 @@ class ExcelController extends Controller
                 DB::raw('SUM(CASE WHEN orders.status_id = 4 THEN 1 ELSE 0 END) as rejected_orders')
             )
             ->leftJoin('categories as c', 'c.category_id', '=', 'goods.category_id')
-            ->leftJoin('orders', 'orders.good_id', '=', 'goods.id')
+            ->leftJoin('orders', 'orders.good_id', '=', 'goods.good_id')
             ->groupBy('goods.id', 'c.name', 'goods.name', 'goods.price')
             ->orderByDesc('total_orders')
             ->withCount('orders')
