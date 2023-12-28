@@ -3,15 +3,14 @@
 
 return [
     'api' => [
-        'get_categories' => 'http://192.168.1.10:8080/Rizo/hs/Rizo_shop/Categories',
-        'get_goods' => 'http://192.168.1.10:8080/Rizo/hs/Rizo_shop/Products',
-        'get_brands' => 'http://192.168.1.10:8080/Rizo/hs/Rizo_shop/Brands',
-        'get_images' => 'http://192.168.1.10:8080/Rizo/hs/Rizo_shop/Images',
-
-        'order' => 'http://192.168.1.10:8080/Rizo/hs/Rizo_shop/Doc_Sale'
+        'get_categories' => 'http://10.102.15.162/Artel/hs/Rizo_shop/Categories',
+        'get_goods' => 'http://10.102.15.162/Artel/hs/Rizo_shop/Products',
+        'get_brands' => 'http://10.102.15.162/Artel/hs/Rizo_shop/Brands',
+        'get_images' => 'http://10.102.15.162/Artel/hs/Rizo_shop/Images',
+        'order' => 'http://10.102.15.162/Artel/hs/Rizo_shop/Doc_Sale'
     ],
     'credentials' => [
-        'login' => 'Admin',
-        'password' => '2022'
+        'login' => 'Администратор',
+        'password' => '2000'
     ]
 ];
