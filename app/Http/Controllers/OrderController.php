@@ -40,6 +40,12 @@ class OrderController extends Controller
         }
     }
 
+    public function complete($orderCode) {
+        $this->orderService->completeOrder($orderCode);
+
+        return redirect()->route('orders.index')->with('success', 'Заказ успешно завершен!');
+    }
+
     public function rejectOrder($orderCode)
     {
         $res = $this->orderService->rejectOrder($orderCode);

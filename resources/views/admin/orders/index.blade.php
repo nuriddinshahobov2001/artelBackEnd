@@ -23,7 +23,7 @@
                 <th>Номер заказа</th>
                 <th>Телефон заказчика</th>
                 <th>Адрес доставки</th>
-                <th>Статут</th>
+                <th>Статус</th>
                 <th>Действие</th>
                 </thead>
                 <tbody>
@@ -34,7 +34,20 @@
                         <td>{{ $order->order_code }}</td>
                         <td>{{ $order->phone }}</td>
                         <td>{{ $order->address }}</td>
-                        <td>{{ $order->status }}</td>
+                        @if($order->status == "На рассмотрение")
+                        <td>
+                            <button class="btn btn-warning">{{$order->status}}</button>
+                        </td>
+                        @elseif($order->status == "Завершено")
+                            <td>
+                                <button class="btn btn-success">{{$order->status}}</button>
+                            </td>
+                        @elseif($order->status == "Отклонен")
+                            <td>
+                                <button class="btn btn-danger">{{$order->status}}</button>
+                            </td>
+                        @endif
+
                         <td>
                             <a href="{{ route('orders.show', $order->order_code) }}" class="btn btn-primary">
                                 Подробнее...

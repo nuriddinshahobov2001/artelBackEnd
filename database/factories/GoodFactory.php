@@ -23,7 +23,8 @@ class GoodFactory extends Factory
             'slug' => Str::slug(fake()->name()),
             'description' => fake()->text(),
             'full_description' => fake()->text(),
-            'category_id' => Category::find(rand(1, 20))->first()
+            'category_id' => rand(1, 20),
+            'brand_id' => rand(1, 20)
         ];
     }
 }

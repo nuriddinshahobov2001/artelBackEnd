@@ -20,7 +20,8 @@ class GoodController extends Controller
 
     public function index()
     {
-        $goods = Good::filter()->with('brand', 'category')->get();
+        $goods = Good::unFilter()->with('brand', 'category')->get();
+        
         return view('admin.goods.index', compact('goods'));
     }
 
