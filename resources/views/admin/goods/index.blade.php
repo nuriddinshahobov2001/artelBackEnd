@@ -37,7 +37,7 @@
                         <td>{{ Str::limit($good->description, 50) }}</td>
                         <td>{{ $good->price }}</td>
                         <td width="200px">
-                            <a href="{{ route('good.show', $good->id) }}" class="btn btn-warning">
+                            <a href="{{ route('good.show', $good->slug) }}" class="btn btn-warning">
                                 <i class="bi bi-eye"></i>
                             </a>
                             <a href="#" role="button" class="btn btn-danger"
@@ -77,6 +77,9 @@
                 @endforeach
                 </tbody>
             </table>
+            <div>
+                {{ $goods->links() }}
+            </div>
         </div>
     </section>
 

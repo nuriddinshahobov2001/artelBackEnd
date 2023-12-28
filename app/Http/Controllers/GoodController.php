@@ -13,6 +13,7 @@ use Illuminate\Support\Facades\Http;
 
 class GoodController extends Controller
 {
+    const ON_PAGE= 30;
     public function __construct(GoodService $goodService)
     {
         $this->goodService = $goodService;
@@ -20,13 +21,15 @@ class GoodController extends Controller
 
     public function index()
     {
-        $goods = Good::unFilter()->with('brand', 'category')->get();
-        
+        $goods = Good::unFilter()->with('brand', 'category')->paginate(self::ON_PAGE);
+
         return view('admin.goods.index', compact('goods'));
     }
 
-    public function show(Good $good)
+    public function show($slug)
     {
+        $good = Good::where('slug', $slug)->with('brand', 'category', 'images')->first();
+
         return view('admin.goods.show', compact('good'));
     }
 
@@ -92,7 +95,7 @@ class GoodController extends Controller
 
     public function goodsWithDefects()
     {
-        $goods = Good::unFilter()->get();
+        $goods = Good::unFilter()->with('category')->paginate(self::ON_PAGE);
 
         return view('admin.goods.goods_with_defects', compact('goods'));
     }

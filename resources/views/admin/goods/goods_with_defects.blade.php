@@ -31,6 +31,7 @@
                 @endforeach
                 </tbody>
             </table>
+            {{ $goods->links() }}
         </div>
     </section>
 @endsection

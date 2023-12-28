@@ -23,6 +23,7 @@ Route::middleware('checkRole:admin')->group(function () {
     Route::get('/images/get', [\App\Http\Controllers\ImageController::class, 'get'])->name('image.get');
 
    Route::resource('/good', \App\Http\Controllers\GoodController::class);
+   Route::get('/good/{slug}', [\App\Http\Controllers\GoodController::class, 'show'])->name('good.show');
    Route::get('/get', [\App\Http\Controllers\GoodController::class, 'get'])->name('good.get');
    Route::get('goodsWithDefects', [\App\Http\Controllers\GoodController::class, 'goodsWithDefects'])->name('goodsWithDefects');
    Route::get('goodsWithDefects/{slug}', [\App\Http\Controllers\GoodController::class, 'showGoodsWithDefects'])->name('showGoodsWithDefects');
