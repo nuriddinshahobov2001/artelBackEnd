@@ -23,7 +23,7 @@ class GoodResource extends JsonResource
         }
 
         return [
-            'id' => $this->id,
+            'id' => $this->good_id,
             'name' => $this->name,
             'slug' => $this->slug,
             'description' => $this->description,
@@ -33,21 +33,20 @@ class GoodResource extends JsonResource
             'count' => $this->count,
             'brand' => $this->brand?->name,
             'brand_slug' => $this->brand?->slug,
+            'category' => $this->category?->name,
+            'category_slug' => $this->category?->slug,
             'image' => $image,
-//            'images' => $this->all_images($this->good_id),
-            'images' => $this->all_images($this->id),
+            'images' => $this->all_images(),
         ];
     }
-    public function all_images($id)
+    
+    public function all_images()
     {
         $images = array();
-        $good_imgs = Image::where([
-            ['id', $id],
-            ['is_main', '!==', 1]
-        ])->get();
-
-        foreach ($good_imgs as $img) {
-            $images[] = $img->image;
+        foreach ($this->images as $img) {
+            if($img->is_main != 1) {
+                $images[] = $img->image;
+            }
         }
         return $images;
     }

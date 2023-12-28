@@ -3,7 +3,7 @@
 use Illuminate\Support\Facades\Route;
 
 
-Route::middleware('auth')->group(function () {
+Route::middleware('checkRole:admin')->group(function () {
     Route::get('/brands', [\App\Http\Controllers\BrandController::class, 'index'])->name('brands.index');
     Route::post('/brands', [\App\Http\Controllers\BrandController::class, 'store'])->name('brands.store');
     Route::put('/brands/{brand}', [\App\Http\Controllers\BrandController::class, 'update'])->name('brands.update');
@@ -28,6 +28,26 @@ Route::middleware('auth')->group(function () {
    Route::get('goodsWithDefects/{slug}', [\App\Http\Controllers\GoodController::class, 'showGoodsWithDefects'])->name('showGoodsWithDefects');
 
     Route::get('get/goods/excel', [\App\Http\Controllers\ExcelController::class, 'excel'])->name('excel');
+
+    Route::get('report/goods', [\App\Http\Controllers\ExcelController::class, 'GoodReport'])->name('report.goods');
+
+});
+
+Route::middleware('checkRole:admin|consultant')->group(function () {
+    Route::group(['as' => 'orders.'], function () {
+        Route::get('orders', [\App\Http\Controllers\OrderController::class, 'index'])->name('index');
+        Route::get('orders/show/{orderCode}', [\App\Http\Controllers\OrderController::class, 'show'])->name('show');
+        Route::post('/orders/accept/{orderCode}', [\App\Http\Controllers\OrderController::class, 'acceptOrder'])->name('acceptOrder');
+        Route::post('/orders/complete/{orderCode}', [\App\Http\Controllers\OrderController::class, 'complete'])->name('completeOrder');
+        Route::post('/orders/reject/{orderCode}', [\App\Http\Controllers\OrderController::class, 'rejectOrder'])->name('rejectOrder');
+    });
+
+    Route::group(['as' => 'change_password.'], function () {
+        Route::get('/change_password', [\App\Http\Controllers\PasswordController::class, 'index'])->name('index');
+        Route::post('/change_password', [\App\Http\Controllers\PasswordController::class, 'store'])->name('store');
+    });
+
+
 
 });
 

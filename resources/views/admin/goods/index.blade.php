@@ -17,6 +17,9 @@
         <a href="{{ route('good.get') }}" class="btn btn-outline-success">
             Загрузить
         </a>
+        <a href="{{ route('report.goods') }}" class="btn btn-outline-danger">
+            Отчет товаров
+        </a>
         <div class="col-12">
             <table class="table">
                 <thead>
@@ -33,7 +36,7 @@
                         <td>{{ $good->name }}</td>
                         <td>{{ Str::limit($good->description, 50) }}</td>
                         <td>{{ $good->price }}</td>
-                        <td>
+                        <td width="200px">
                             <a href="{{ route('good.show', $good->id) }}" class="btn btn-warning">
                                 <i class="bi bi-eye"></i>
                             </a>

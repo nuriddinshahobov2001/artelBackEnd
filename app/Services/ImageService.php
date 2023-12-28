@@ -49,7 +49,8 @@ class ImageService
             foreach ($images as $image) {
                 Image::create([
                     'good_id' => $image['good_id'],
-                    'image' => $image['image']
+                    'image' => $image['image'],
+                    'is_main' => $image['is_main']
                 ]);
             }
 

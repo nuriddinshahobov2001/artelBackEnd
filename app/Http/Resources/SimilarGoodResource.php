@@ -17,12 +17,12 @@ class SimilarGoodResource extends JsonResource
         $image = null;
         foreach ($this->images as $img){
             if ($img->is_main === 1) {
-                $image = $img->img_url;
+                $image = $img->image;
             }
         }
 
         return [
-            'id' => $this->id,
+            'id' => $this->good_id,
             'name' => $this->name,
             'slug' => $this->slug,
             'sale' => $this->sale,

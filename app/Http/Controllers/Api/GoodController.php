@@ -15,12 +15,21 @@ class GoodController extends Controller
     public function getAllGoods()
     {
         return response()->json([
-            'goods' => AllGoodsResource::collection(Good::all())
+            'goods' => AllGoodsResource::collection(
+                Good::filter()
+                    ->select('good_id', 'name', 'slug')
+                    ->get()
+            )
         ]);
     }
     public function getRandomGoods(): JsonResponse
     {
-        $goods = Good::query()->inRandomOrder()->limit(20)->get();
+        $goods = Good::query()
+            ->filter()
+            ->with('brand', 'category', 'images')
+            ->inRandomOrder()
+            ->limit(20)
+            ->get();
 
         return response()->json([
            'message' => true,
@@ -31,7 +40,10 @@ class GoodController extends Controller
 
     public function getBySlug($slug): JsonResponse
     {
-        $good = Good::query()->where('slug', $slug)->first();
+        $good = Good::query()
+            ->with('brand', 'category', 'images')
+            ->where('slug', $slug)
+            ->first();
 
         if (!$good) {
             return response()->json([
@@ -48,18 +60,54 @@ class GoodController extends Controller
 
     public function getGoodsByCategory($slug): JsonResponse
     {
-        $category = Category::query()->where('slug', $slug)->first();
-        $goods = Good::where('category_id', $category?->id)->get();
+        $category = Category::query()
+            ->where('slug', $slug)
+            ->first();
+        if (!$category) {
+            return response()->json([
+                'message' => false
+            ]);
+        }
+
+        if ($category->parent_id !== null) {
+            $goods = Good::filter()
+                ->with('category', 'images')
+                ->where('category_id', $category->category_id)
+                ->get();
+
+            return response()->json([
+                'message' => true,
+                'goods' => GoodResource::collection($goods)
+            ]);
+        }
+
+        $goods = Good::select('goods.*')
+            ->join('categories', 'categories.category_id', '=', 'goods.category_id')
+            ->where([
+                ['categories.parent_id', $category->category_id],
+                ['goods.category_id', '!=', null],
+                ['goods.price', '!=', 0],
+                ['goods.name', '!=', ''],
+                ['goods.description', '!=', ''],
+                ['goods.full_description', '!=', '[]']
+            ])
+            ->whereHas('images', function ($query) {
+                $query->where('is_main', true);
+            })->get();
 
         return response()->json([
             'message' => true,
             'goods' => GoodResource::collection($goods)
         ]);
+
     }
 
     public function getSimilarProducts($categorySlug, $goodSlug): JsonResponse
     {
-        $category = Category::query()->where('slug', $categorySlug)->select('category_id')->first();
+        $category = Category::query()
+            ->where('slug', $categorySlug)
+            ->select('category_id')
+            ->first();
 
         if ($category === null) {
             return response()->json([
@@ -68,10 +116,15 @@ class GoodController extends Controller
             ]);
         }
 
-        $goods = Good::query()->where([
-            ['category_id', $category->category_id],
-            ['slug', '!=', $goodSlug]
-        ])->inRandomOrder()->limit(20)->get();
+        $goods = Good::query()
+            ->filter()
+            ->with('images')
+            ->where([
+                ['category_id', $category->category_id],
+                ['slug', '!=', $goodSlug]
+            ])->inRandomOrder()
+            ->limit(20)
+            ->get();
 
         return response()->json([
             'message' => true,
@@ -81,7 +134,10 @@ class GoodController extends Controller
 
     public function getHitProducts(): JsonResponse
     {
-        $goods = Good::where('is_hit', true)->get();
+        $goods = Good::filter()
+            ->with('brand', 'category', 'images')
+            ->where('is_hit', '=',true)
+            ->get();
 
         return response()->json([
             'goods' => GoodResource::collection($goods)
@@ -90,7 +146,10 @@ class GoodController extends Controller
 
     public function getSaleProducts(): JsonResponse
     {
-        $goods = Good::where('is_sale', true)->get();
+        $goods = Good::filter()
+            ->with('brand', 'category', 'images')
+            ->where('is_sale', '=',true)
+            ->get();
 
         return response()->json([
             'goods' => GoodResource::collection($goods)
@@ -99,7 +158,10 @@ class GoodController extends Controller
 
     public function getSeasonalProducts(): JsonResponse
     {
-        $goods = Good::where('is_seasonal', true)->get();
+        $goods = Good::filter()
+            ->with('brand', 'category', 'images')
+            ->where('is_seasonal', '=',true)
+            ->get();
 
         return response()->json([
             'goods' => GoodResource::collection($goods)
