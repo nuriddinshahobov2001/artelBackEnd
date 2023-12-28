@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\DB;
 
 class OrderController extends Controller
 {
+    const ON_SELF = 30;
     private OrderService $orderService;
 
     public function __construct(OrderService $orderService)

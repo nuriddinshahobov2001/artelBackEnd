@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Storage;
 
 class CategoryController extends Controller
 {
+    const ON_SELF = 30;
     public function __construct(CategoryService $categoryService)
     {
         $this->categoryService = $categoryService;
@@ -18,7 +19,7 @@ class CategoryController extends Controller
 
     public function index()
     {
-        $categories = Category::all();
+        $categories = Category::paginate(self::ON_SELF);
 
         return view('admin.category.index', compact('categories'));
     }
@@ -65,7 +66,7 @@ class CategoryController extends Controller
 
         $res = $this->categoryService->get($response->json()['data']);
         if ($res) {
-            return redirect()->back()->with('success', 'Успешно загружено!');
+            return redirect()->back()->with('success', 'Категории успешно загружены!');
         } else {
             return redirect()->back()->with('error', $res);
         }

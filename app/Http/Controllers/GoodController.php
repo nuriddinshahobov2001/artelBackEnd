@@ -89,7 +89,7 @@ class GoodController extends Controller
         $res = $this->goodService->get($goods);
 
         if ($res) {
-            return redirect()->back()->with('success', 'Успешно загружено!');
+            return redirect()->back()->with('success', 'Товары успешно загружены!');
         }
     }
 

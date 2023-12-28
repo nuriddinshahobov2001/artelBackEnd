@@ -13,6 +13,7 @@ use Illuminate\Support\Facades\Validator;
 
 class ImageController extends Controller
 {
+    const ON_SELF = 30;
     public function __construct(ImageService $imageService)
     {
         $this->imageService = $imageService;
@@ -20,10 +21,9 @@ class ImageController extends Controller
 
     public function index()
     {
-        $images = Image::all();
-        $goods = Good::all();
+        $images = Image::with('good')->paginate(self::ON_SELF);
 
-        return view('admin.images.index', compact('images', 'goods'));
+        return view('admin.images.index', compact('images', ));
     }
 
     public function store(Request $request)
@@ -74,7 +74,7 @@ class ImageController extends Controller
 
         $res = $this->imageService->get($response->json()['data']);
         if ($res) {
-            return redirect()->back()->with('success', 'Успешно загружено!');
+            return redirect()->back()->with('success', 'Изображении успешно загружены!');
         } else {
             return redirect()->back()->with('error', $res);
         }
