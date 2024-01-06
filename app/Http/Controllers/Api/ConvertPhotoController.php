@@ -15,8 +15,15 @@ class ConvertPhotoController extends Controller
 
         $decode = base64_decode($base64);
         $fileName = uniqid() . '.png';
-        $filePath = storage_path('app/public/good_img/' . $fileName);
+        $directory = storage_path('app/public/good_img/');
+        $filePath = $directory . $fileName;
+
+        if (!file_exists($directory)) {
+            mkdir($directory, 0777, true);
+        }
+
         file_put_contents($filePath, $decode);
+
 
         $imageUrl = url('storage/good_img/' . $fileName);
 

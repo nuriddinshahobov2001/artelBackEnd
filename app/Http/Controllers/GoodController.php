@@ -21,7 +21,7 @@ class GoodController extends Controller
 
     public function index()
     {
-        $goods = Good::unFilter()->with('brand', 'category')->paginate(self::ON_PAGE);
+        $goods = Good::filter()->with('brand', 'category')->paginate(self::ON_PAGE);
 
         return view('admin.goods.index', compact('goods'));
     }
