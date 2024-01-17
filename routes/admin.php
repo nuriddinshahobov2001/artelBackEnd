@@ -32,6 +32,15 @@ Route::middleware('checkRole:admin')->group(function () {
 
     Route::get('report/goods', [\App\Http\Controllers\ExcelController::class, 'GoodReport'])->name('report.goods');
 
+    Route::group(['as' => 'sliders_and_banners.'], function () {
+        Route::get('sliders_and_banners/sliders', [\App\Http\Controllers\SlidersAndBannersController::class, 'sliders'])->name('sliders');
+        Route::post('sliders_and_banners/add_slider', [\App\Http\Controllers\SlidersAndBannersController::class, 'add_slider'])->name('add_slider');
+        Route::get('sliders_and_banners/banner', [\App\Http\Controllers\SlidersAndBannersController::class, 'banner'])->name('banner');
+        Route::post('sliders_and_banners/add_banner', [\App\Http\Controllers\SlidersAndBannersController::class, 'add_banner'])->name('add_banner');
+        Route::get('sliders_and_banners/footer', [\App\Http\Controllers\SlidersAndBannersController::class, 'footer'])->name('footer');
+        Route::post('sliders_and_banners/add_footer', [\App\Http\Controllers\SlidersAndBannersController::class, 'add_footer'])->name('add_footer');
+        Route::delete('sliders_and_banners/destroy/{id}', [\App\Http\Controllers\SlidersAndBannersController::class, 'destroy'])->name('destroy');
+    });
 });
 
 Route::middleware('checkRole:admin|consultant')->group(function () {

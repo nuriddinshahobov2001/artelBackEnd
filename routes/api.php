@@ -36,6 +36,7 @@ Route::middleware('auth.basic')->group(function () {
    Route::get('getSaleProducts', [\App\Http\Controllers\Api\GoodController::class, 'getSaleProducts']);
    Route::get('getSeasonalProducts', [\App\Http\Controllers\Api\GoodController::class, 'getSeasonalProducts']);
 
+    Route::get('sliders_and_banners/{param}', [\App\Http\Controllers\Api\SlidersAndBannersController::class, 'sliders_and_banners']);
 
     Route::post('/order', [\App\Http\Controllers\Api\OrderController::class, 'order']);//->middleware('auth:sanctum');
 

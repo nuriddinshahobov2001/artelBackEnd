@@ -72,6 +72,22 @@
                     <span>Товари с недостатками</span>
                 </a>
             </li>
+            <li class="sidebar-item has-sub">
+                <a href="#" class="sidebar-link">
+                    <span>Слайдеры и баннеры</span>
+                </a>
+                <ul class="submenu ">
+                    <li class="submenu-item  ">
+                        <a href="{{ route('sliders_and_banners.sliders') }}">Сдайдеры</a>
+                    </li>
+                    <li class="submenu-item  ">
+                        <a href="{{ route('sliders_and_banners.banner') }}">Баннеры</a>
+                    </li>
+                    <li class="submenu-item  ">
+                        <a href="{{ route('sliders_and_banners.footer') }}">Футеры</a>
+                    </li>
+                </ul>
+            </li>
             <li
                 class="sidebar-item {{ (request()->is('change_password') or request()->is('change_password/*')) ? 'active' : '' }}">
                 <a href="{{ route('change_password.index') }}" class='sidebar-link'>
