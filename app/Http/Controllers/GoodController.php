@@ -8,15 +8,20 @@ use App\Models\Brand;
 use App\Models\Category;
 use App\Models\Good;
 use App\Services\GoodService;
+use App\Services\ImageService;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Http;
 
 class GoodController extends Controller
 {
     const ON_PAGE= 30;
-    public function __construct(GoodService $goodService)
+    private GoodService $goodService;
+    private ImageService $imageService;
+
+    public function __construct(GoodService $goodService, ImageService $imageService)
     {
         $this->goodService = $goodService;
+        $this->imageService = $imageService;
     }
 
     public function index()
@@ -81,21 +86,31 @@ class GoodController extends Controller
             Config::get('constants.credentials.password')
         )->get(Config::get('constants.api.get_goods'));
 
-        if (!$response->successful()) {
+        $response1 = Http::withHeaders([
+            'Content-Type' => 'application/json; charset=utf-8'
+        ])->withBasicAuth(
+            Config::get('constants.credentials.login'),
+            Config::get('constants.credentials.password')
+        )->get(Config::get('constants.api.get_images'));
+
+        if (!$response->successful() || !$response1->successful()) {
             return redirect()->back()->with('error', 'Ошибка при загрузки товаров!');
         }
 
         $goods = $response->json()['data'];
         $res = $this->goodService->get($goods);
 
-        if ($res) {
+        $images = $response1->json()['data'];
+        $res1 = $this->imageService->get($images);
+
+        if ($res && $res1) {
             return redirect()->back()->with('success', 'Товары успешно загружены!');
         }
     }
 
     public function goodsWithDefects()
     {
-        $goods = Good::unFilter()->with('category')->paginate(self::ON_PAGE);
+        $goods = Good::unFilter()->with('category')->get();//->paginate(self::ON_PAGE);
 
         return view('admin.goods.goods_with_defects', compact('goods'));
     }

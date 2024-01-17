@@ -37,14 +37,18 @@
                         <input name="sale" class="form-control mt-3" value="{{ $good->sale }}" disabled>
                     </div>
                 </div>
-
-                <div class="col-7" >
-                    <label>Полное описание</label>
-                    @if(is_array($good->full_description))
+                <div class="col-5">
+                    <label>Описание</label>
                     <textarea class="form-control" cols="30" rows="3" disabled
-                            >@foreach(json_decode($good->full_description) as $item) @foreach($item as $key => $value){{ $key }}: {{ $value . "\n" }} @endforeach @endforeach
-                    </textarea>
-                    @endif
+                    >{{ $good->description }}</textarea>
+
+                </div>
+                <div class="col-7">
+                    <label>Полное описание</label>
+{{--                    @if(is_array($good->full_description))--}}
+                        <textarea class="form-control" cols="30" rows="3" disabled
+                        >@foreach(json_decode($good?->full_description) as $item) @foreach($item as $key => $value){{ $key }}: {{ $value . "\n" }} @endforeach @endforeach</textarea>
+{{--                    @endif--}}
                 </div>
             </div>
         </div>
@@ -52,7 +56,7 @@
 
     @if(isset($good->images))
         @foreach($good->images as $image)
-            <img src="{{ $image?->image }}"  style="width: 200px">
+            <img src="{{ $image?->image }}" style="width: 200px">
         @endforeach
     @endif
 @endsection

@@ -31,7 +31,7 @@
                 @endforeach
                 </tbody>
             </table>
-            {{ $goods->links() }}
+{{--            {{ $goods->links() }}--}}
         </div>
     </section>
 @endsection

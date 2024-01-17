@@ -16,8 +16,8 @@ class GoodController extends Controller
     {
         return response()->json([
             'goods' => AllGoodsResource::collection(
-                Good::filter()
-                    ->select('good_id', 'name', 'slug')
+                Good:://filter()
+                    select('good_id', 'name', 'slug')
                     ->get()
             )
         ]);
@@ -25,7 +25,7 @@ class GoodController extends Controller
     public function getRandomGoods(): JsonResponse
     {
         $goods = Good::query()
-            ->filter()
+            //->filter()
             ->with('brand', 'category', 'images')
             ->inRandomOrder()
             ->limit(20)
@@ -70,8 +70,8 @@ class GoodController extends Controller
         }
 
         if ($category->parent_id !== null) {
-            $goods = Good::filter()
-                ->with('category', 'images')
+            $goods = Good:://filter()
+                with('category', 'images')
                 ->where('category_id', $category->category_id)
                 ->get();
 
@@ -117,7 +117,7 @@ class GoodController extends Controller
         }
 
         $goods = Good::query()
-            ->filter()
+           // ->filter()
             ->with('images')
             ->where([
                 ['category_id', $category->category_id],
@@ -134,8 +134,8 @@ class GoodController extends Controller
 
     public function getHitProducts(): JsonResponse
     {
-        $goods = Good::filter()
-            ->with('brand', 'category', 'images')
+        $goods = Good:://filter()
+            with('brand', 'category', 'images')
             ->where('is_hit', '=',true)
             ->get();
 
@@ -146,8 +146,8 @@ class GoodController extends Controller
 
     public function getSaleProducts(): JsonResponse
     {
-        $goods = Good::filter()
-            ->with('brand', 'category', 'images')
+        $goods = Good:://filter()
+            with('brand', 'category', 'images')
             ->where('is_sale', '=',true)
             ->get();
 
@@ -158,8 +158,8 @@ class GoodController extends Controller
 
     public function getSeasonalProducts(): JsonResponse
     {
-        $goods = Good::filter()
-            ->with('brand', 'category', 'images')
+        $goods = Good:://filter()
+            with('brand', 'category', 'images')
             ->where('is_seasonal', '=',true)
             ->get();
 

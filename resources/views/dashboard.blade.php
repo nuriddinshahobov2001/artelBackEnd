@@ -13,11 +13,13 @@
             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
         </div>
     @endif
-    <div>
-        <a href="{{ route('good.get') }}" class="btn btn-outline-primary">Загрузить товаров</a>
-        <a href="{{ route('brands.get') }}" class="btn btn-outline-success">Загрузить бренды</a>
-        <a href="{{ route('category.get') }}" class="btn btn-outline-danger">Загрузить категорий</a>
-        <a href="{{ route('image.get') }}" class="btn btn-outline-warning">Загрузить изображений</a>
-    </div>
 
+    @role('admin')
+        <div>
+            <a href="{{ route('good.get') }}" class="btn btn-outline-primary">Загрузить товаров</a>
+            <a href="{{ route('brands.get') }}" class="btn btn-outline-success">Загрузить бренды</a>
+            <a href="{{ route('category.get') }}" class="btn btn-outline-warning">Загрузить категорий</a>
+        </div>
+
+    @endrole
 @endsection

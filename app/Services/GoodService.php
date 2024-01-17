@@ -50,8 +50,8 @@ class GoodService
                 Good::updateOrCreate(
                     ['good_id' => $good['id']],
                     [
-                        'name' => $good['name'],
-                        'slug' => Str::slug($good['name'] . '-' . Str::random(5), '-'),
+                        'name' => $good['full_name'],
+                        'slug' => Str::slug($good['full_name'] . '-' . Str::random(5), '-'),
                         'description' => $good['description'],
                         'full_description' => json_encode($good['full_description']) ?? null,
 //                        'full_description' => json_encode($good['full_description']) ?? null,
