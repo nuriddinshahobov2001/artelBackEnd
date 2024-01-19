@@ -24,7 +24,6 @@ class ConvertPhotoController extends Controller
 
         file_put_contents($filePath, $decode);
 
-
         $imageUrl = url('storage/good_img/' . $fileName);
 
         return response()->json([

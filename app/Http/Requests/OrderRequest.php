@@ -32,8 +32,8 @@ class OrderRequest extends FormRequest
             'phone' => 'required',
             'comments' => '',
             'address' => '',
-            'isDelivery' => '',
-            'totalPrice' => '',
+            'delivery' => '',
+            'total_sum' => '',
         ];
     }
 

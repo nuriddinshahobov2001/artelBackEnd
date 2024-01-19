@@ -4,11 +4,14 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Http\Resources\AllGoodsResource;
+use App\Http\Resources\BannerResource;
 use App\Http\Resources\GoodResource;
 use App\Http\Resources\SimilarGoodResource;
 use App\Models\Category;
 use App\Models\Good;
+use App\Models\SlidersAndBanners;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Support\Facades\Storage;
 
 class GoodController extends Controller
 {
@@ -139,7 +142,10 @@ class GoodController extends Controller
             ->where('is_hit', '=',true)
             ->get();
 
+        $image = SlidersAndBanners::where('type', SlidersAndBanners::HIT)->get();
+
         return response()->json([
+            'banner' => BannerResource::make($image[0]),
             'goods' => GoodResource::collection($goods)
         ]);
     }
@@ -151,7 +157,10 @@ class GoodController extends Controller
             ->where('is_sale', '=',true)
             ->get();
 
+        $image = SlidersAndBanners::where('type', SlidersAndBanners::SALE)->get();
+
         return response()->json([
+            'banner' => BannerResource::make($image[0]),
             'goods' => GoodResource::collection($goods)
         ]);
     }
@@ -163,7 +172,10 @@ class GoodController extends Controller
             ->where('is_seasonal', '=',true)
             ->get();
 
+        $image = SlidersAndBanners::where('type',  SlidersAndBanners::SEASONAL)->get();
+
         return response()->json([
+            'banner' => BannerResource::make($image[0]),
             'goods' => GoodResource::collection($goods)
         ]);
     }

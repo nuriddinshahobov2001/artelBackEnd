@@ -27,10 +27,10 @@ class OrderService
                    'price' => $product['price'],
                    'sale' => $product['sale'],
                    'phone' => $order['phone'],
-                   'comments' => $order['comments'],
+                   'comments' => $order['comments'] ?? '',
                    'address' => $order['address'],
-                   'totalPrice' => $order['totalPrice'],
-                   'delivery' =>$order['isDelivery'],
+                   'totalPrice' => $order['total_sum'],
+                   'delivery' =>$order['delivery'],
                    'order_code' => $random,
                    'status_id' => OrderStatus::UNDER_CONSIDERATION
                 ]);
