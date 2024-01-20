@@ -39,6 +39,8 @@ Route::middleware('checkRole:admin')->group(function () {
         Route::post('sliders_and_banners/add_banner', [\App\Http\Controllers\SlidersAndBannersController::class, 'add_banner'])->name('add_banner');
         Route::get('sliders_and_banners/footer', [\App\Http\Controllers\SlidersAndBannersController::class, 'footer'])->name('footer');
         Route::post('sliders_and_banners/add_footer', [\App\Http\Controllers\SlidersAndBannersController::class, 'add_footer'])->name('add_footer');
+        Route::get('sliders_and_banners/category_page', [\App\Http\Controllers\SlidersAndBannersController::class, 'category_page'])->name('category_page');
+        Route::post('sliders_and_banners/add_category_page', [\App\Http\Controllers\SlidersAndBannersController::class, 'add_category_page'])->name('add_category_page');
         Route::delete('sliders_and_banners/destroy/{id}', [\App\Http\Controllers\SlidersAndBannersController::class, 'destroy'])->name('destroy');
     });
 });

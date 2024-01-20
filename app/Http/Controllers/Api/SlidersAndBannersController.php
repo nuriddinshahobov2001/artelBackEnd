@@ -21,6 +21,9 @@ class SlidersAndBannersController extends Controller
         } elseif ($param == 3) {
             $images = SlidersAndBanners::where('type', SlidersAndBanners::FOOTER)
                 ->orderByDesc('created_at')->limit(2)->get();
+        } elseif ($param == 4) {
+            $images = SlidersAndBanners::where('type', SlidersAndBanners::CATEGORY_PAGE)
+                ->orderByDesc('created_at')->limit(1)->get();
         } else {
             return response()->json([
                 'message' => 'Ошибка! Вы ввели неправильный параметр!'

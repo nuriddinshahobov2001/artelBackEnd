@@ -14,12 +14,13 @@
             </div>
         @endif
         <div>
-            <a href="" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#addFooter"
+            <a href="" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#addCategoryPage"
             >Добавить</a>
             <table class="table">
                 <thead>
                 <th>#</th>
                 <th>Картинка</th>
+                <th>Тип</th>
                 <th>Действие</th>
                 </thead>
                 <tbody>
@@ -29,12 +30,22 @@
                         <td><img src="{{ \Illuminate\Support\Facades\Storage::url($image->image) }}" alt="" width="100">
                         </td>
                         <td>
+                            @if($image->type == 2)
+                                Акционные
+                            @elseif($image->type == 3)
+                                Хит продаж
+                            @elseif($image->type == 4)
+                                Сезонные товары
+                            @else Не указано
+                            @endif
+                        </td>
+                        <td>
                             <a href="#" role="button" class="btn btn-danger"
-                               data-bs-toggle="modal" data-bs-target="#deleteFooter{{ $image->id }}"><i
+                               data-bs-toggle="modal" data-bs-target="#deleteBanner{{ $image->id }}"><i
                                     class="bi bi-trash"></i></a>
                         </td>
                     </tr>
-                    <div class="modal fade" id="deleteFooter{{ $image->id }}" tabindex="-1"
+                    <div class="modal fade" id="deleteBanner{{ $image->id }}" tabindex="-1"
                          aria-labelledby="exampleModalLabel" aria-hidden="true">
                         <div class="modal-dialog">
                             <div class="modal-content">
@@ -66,14 +77,14 @@
             </table>
         </div>
     </section>
-    <div class="modal fade" id="addFooter" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal fade" id="addCategoryPage" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Добавление футера</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">Добавление баннера</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Закрыть"></button>
                 </div>
-                <form action="{{ route('sliders_and_banners.add_footer') }}" method="POST"
+                <form action="{{ route('sliders_and_banners.add_category_page') }}" method="POST"
                       enctype="multipart/form-data">
                     @csrf
                     <div class="modal-body">

@@ -86,6 +86,9 @@
                     <li class="submenu-item  ">
                         <a href="{{ route('sliders_and_banners.footer') }}">Футеры</a>
                     </li>
+                    <li class="submenu-item  ">
+                        <a href="{{ route('sliders_and_banners.category_page') }}">Страница категории</a>
+                    </li>
                 </ul>
             </li>
             <li

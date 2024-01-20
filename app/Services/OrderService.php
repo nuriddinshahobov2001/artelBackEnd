@@ -3,6 +3,7 @@
 namespace App\Services;
 
 
+use App\Mail\OrderMail;
 use App\Mail\SendMessageAboutOrderMail;
 use App\Models\Good;
 use App\Models\Order;
@@ -21,7 +22,7 @@ class OrderService
             $random = time();
 
             foreach ($order['products'] as $product) {
-                Order::create([
+                 Order::create([
                    'good_id' => $product['good_id'],
                    'count' => $product['count'],
                    'price' => $product['price'],
@@ -37,12 +38,9 @@ class OrderService
             }
             DB::commit();
 
-//            Http::withHeaders([
-//               'Content-Type' => 'application/json; charset=utf-8'
-//            ])->withBasicAuth(
-//                Config::get('constants.credentials.login'),
-//                Config::get('constants.credentials.password')
-//            )->post(Config::get('constants.api.order'), $order);
+            $orders = Order::where('order_code', $random)->get();
+
+            Mail::to('khusravmuhammadi.73@gmail.com')->send(new OrderMail($orders));
 
             return true;
         } catch (\Exception $e) {

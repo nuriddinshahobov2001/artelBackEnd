@@ -63,6 +63,24 @@ class SlidersAndBannersController extends Controller
         return redirect()->back()->with('success', 'Успешно добавлено!');
     }
 
+    public function category_page()
+    {
+        $images = SlidersAndBanners::where('type', SlidersAndBanners::CATEGORY_PAGE)->get();
+
+        return view('admin.sliders_and_banners.category_page', compact('images'));
+    }
+
+    public function add_category_page(Request $request)
+    {
+        $file = Storage::disk('public')->put('sliders_and_banners', $request->image);
+        SlidersAndBanners::create([
+            'image' => $file,
+            'type' => SlidersAndBanners::CATEGORY_PAGE
+        ]);
+
+        return redirect()->back()->with('success', 'Успешно добавлено!');
+    }
+
     public function destroy($id, Request $request)
     {
         $path = 'public/' . $request->image;

@@ -29,7 +29,7 @@ class OrderRequest extends FormRequest
             'products.*.count' => 'required',
             'products.*.price' => 'required',
             'products.*.sale' => '',
-            'phone' => 'required',
+            'phone' => 'required|email',
             'comments' => '',
             'address' => '',
             'delivery' => '',

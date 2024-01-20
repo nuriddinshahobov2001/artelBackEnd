@@ -16,5 +16,6 @@ class SlidersAndBanners extends Model
     const HIT = 3;
     const SEASONAL = 4;
     const FOOTER = 5;
+    const CATEGORY_PAGE = 6;
 
 }
