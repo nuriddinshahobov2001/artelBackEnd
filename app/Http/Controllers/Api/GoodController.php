@@ -98,11 +98,11 @@ class GoodController extends Controller
             ])
             ->whereHas('images', function ($query) {
                 $query->where('is_main', true);
-            })->get();
+            })->paginate(20);
 
         return response()->json([
             'message' => true,
-            'goods' => GoodResource::collection($goods)
+            'goods' => paginatedResponse(GoodResource::collection($goods))
         ]);
 
     }
