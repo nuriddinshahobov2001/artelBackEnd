@@ -76,12 +76,14 @@ class GoodController extends Controller
             $goods = Good:://filter()
                 with('category', 'images')
                 ->where('category_id', $category->category_id)
-                ->get();
+                ->paginate(20);
+
 
             return response()->json([
                 'message' => true,
-                'goods' => GoodResource::collection($goods)
+                'goods' => paginatedResponse(GoodResource::collection($goods))
             ]);
+
         }
 
         $goods = Good::select('goods.*')
