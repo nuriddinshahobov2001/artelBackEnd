@@ -72,7 +72,7 @@ class GoodController extends Controller
             ]);
         }
 
-        if ($category->parent_id !== null) {
+        if ($category->parent_id != null) {
             $goods = Good:://filter()
                 with('category', 'images')
                 ->where('category_id', $category->category_id)
@@ -89,17 +89,18 @@ class GoodController extends Controller
             ->where([
                 ['categories.parent_id', $category->category_id],
                 ['goods.category_id', '!=', null],
-                ['goods.price', '!=', 0],
-                ['goods.name', '!=', ''],
-                ['goods.description', '!=', ''],
-                ['goods.full_description', '!=', '[]']
+//                ['goods.price', '!=', 0],
+//                ['goods.name', '!=', ''],
+//                ['goods.description', '!=', ''],
+//                ['goods.full_description', '!=', '[]']
             ])
-            ->whereHas('images', function ($query) {
-                $query->where('is_main', true);
-            })->get();
-
+//            ->whereHas('images', function ($query) {
+//                $query->where('is_main', true);
+//            })->get();
+->get();
         return response()->json([
             'message' => true,
+            'category_name' => $category->name,
             'goods' => GoodResource::collection($goods)
         ]);
 
@@ -143,7 +144,12 @@ class GoodController extends Controller
             ->get();
 
         $image = SlidersAndBanners::where('type', SlidersAndBanners::HIT)->get();
-
+        if ($image->isEmpty()) {
+            return response()->json([
+                'banner' => '',
+                'goods' => GoodResource::collection($goods)
+            ]);
+        }
         return response()->json([
             'banner' => BannerResource::make($image[0]),
             'goods' => GoodResource::collection($goods)
@@ -158,7 +164,12 @@ class GoodController extends Controller
             ->get();
 
         $image = SlidersAndBanners::where('type', SlidersAndBanners::SALE)->get();
-
+        if ($image->isEmpty()) {
+            return response()->json([
+                'banner' => '',
+                'goods' => GoodResource::collection($goods)
+            ]);
+        }
         return response()->json([
             'banner' => BannerResource::make($image[0]),
             'goods' => GoodResource::collection($goods)
@@ -173,7 +184,12 @@ class GoodController extends Controller
             ->get();
 
         $image = SlidersAndBanners::where('type',  SlidersAndBanners::SEASONAL)->get();
-
+        if ($image->isEmpty()) {
+            return response()->json([
+                'banner' => '',
+                'goods' => GoodResource::collection($goods)
+            ]);
+        }
         return response()->json([
             'banner' => BannerResource::make($image[0]),
             'goods' => GoodResource::collection($goods)

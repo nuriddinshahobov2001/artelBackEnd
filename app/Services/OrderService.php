@@ -40,7 +40,7 @@ class OrderService
 
             $orders = Order::where('order_code', $random)->get();
 
-            Mail::to('khusravmuhammadi.73@gmail.com')->send(new OrderMail($orders));
+//            Mail::to('khusravmuhammadi.73@gmail.com')->send(new OrderMail($orders));
 
             return true;
         } catch (\Exception $e) {
