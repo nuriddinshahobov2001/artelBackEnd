@@ -76,12 +76,14 @@ class GoodController extends Controller
             $goods = Good:://filter()
                 with('category', 'images')
                 ->where('category_id', $category->category_id)
-                ->get();
+                ->paginate(20);
+
 
             return response()->json([
                 'message' => true,
-                'goods' => GoodResource::collection($goods)
+                'goods' => paginatedResponse(GoodResource::collection($goods))
             ]);
+
         }
 
         $goods = Good::select('goods.*')
@@ -94,14 +96,23 @@ class GoodController extends Controller
 //                ['goods.description', '!=', ''],
 //                ['goods.full_description', '!=', '[]']
             ])
+
 //            ->whereHas('images', function ($query) {
 //                $query->where('is_main', true);
 //            })->get();
-->get();
+//->get();
+//        return response()->json([
+//            'message' => true,
+//            'category_name' => $category->name,
+//            'goods' => GoodResource::collection($goods)
+
+            ->whereHas('images', function ($query) {
+                $query->where('is_main', true);
+            })->paginate(20);
+
         return response()->json([
             'message' => true,
-            'category_name' => $category->name,
-            'goods' => GoodResource::collection($goods)
+            'goods' => paginatedResponse(GoodResource::collection($goods))
         ]);
 
     }
