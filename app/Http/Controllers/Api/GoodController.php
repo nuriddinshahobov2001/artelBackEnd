@@ -20,11 +20,12 @@ class GoodController extends Controller
         return response()->json([
             'goods' => AllGoodsResource::collection(
                 Good:://filter()
-                    select('good_id', 'name', 'slug')
+                select('good_id', 'name', 'slug')
                     ->get()
             )
         ]);
     }
+
     public function getRandomGoods(): JsonResponse
     {
         $goods = Good::query()
@@ -35,7 +36,7 @@ class GoodController extends Controller
             ->get();
 
         return response()->json([
-           'message' => true,
+            'message' => true,
             'goods' => GoodResource::collection($goods)
         ]);
     }
@@ -56,8 +57,8 @@ class GoodController extends Controller
         }
 
         return response()->json([
-           'message' => true,
-           'good' => GoodResource::make($good)
+            'message' => true,
+            'good' => GoodResource::make($good)
         ]);
     }
 
@@ -74,7 +75,7 @@ class GoodController extends Controller
 
         if ($category->parent_id != null) {
             $goods = Good:://filter()
-                with('category', 'images')
+            with('category', 'images')
                 ->where('category_id', $category->category_id)
                 ->paginate(20);
 
@@ -83,7 +84,6 @@ class GoodController extends Controller
                 'message' => true,
                 'goods' => paginatedResponse(GoodResource::collection($goods))
             ]);
-
         }
 
         $goods = Good::select('goods.*')
@@ -96,16 +96,6 @@ class GoodController extends Controller
 //                ['goods.description', '!=', ''],
 //                ['goods.full_description', '!=', '[]']
             ])
-
-//            ->whereHas('images', function ($query) {
-//                $query->where('is_main', true);
-//            })->get();
-//->get();
-//        return response()->json([
-//            'message' => true,
-//            'category_name' => $category->name,
-//            'goods' => GoodResource::collection($goods)
-
             ->whereHas('images', function ($query) {
                 $query->where('is_main', true);
             })->paginate(20);
@@ -114,7 +104,6 @@ class GoodController extends Controller
             'message' => true,
             'goods' => paginatedResponse(GoodResource::collection($goods))
         ]);
-
     }
 
     public function getSimilarProducts($categorySlug, $goodSlug): JsonResponse
@@ -132,7 +121,7 @@ class GoodController extends Controller
         }
 
         $goods = Good::query()
-           // ->filter()
+            // ->filter()
             ->with('images')
             ->where([
                 ['category_id', $category->category_id],
@@ -150,8 +139,8 @@ class GoodController extends Controller
     public function getHitProducts(): JsonResponse
     {
         $goods = Good:://filter()
-            with('brand', 'category', 'images')
-            ->where('is_hit', '=',true)
+        with('brand', 'category', 'images')
+            ->where('is_hit', '=', true)
             ->get();
 
         $image = SlidersAndBanners::where('type', SlidersAndBanners::HIT)->get();
@@ -170,8 +159,8 @@ class GoodController extends Controller
     public function getSaleProducts(): JsonResponse
     {
         $goods = Good:://filter()
-            with('brand', 'category', 'images')
-            ->where('is_sale', '=',true)
+        with('brand', 'category', 'images')
+            ->where('is_sale', '=', true)
             ->get();
 
         $image = SlidersAndBanners::where('type', SlidersAndBanners::SALE)->get();
@@ -190,11 +179,11 @@ class GoodController extends Controller
     public function getSeasonalProducts(): JsonResponse
     {
         $goods = Good:://filter()
-            with('brand', 'category', 'images')
-            ->where('is_seasonal', '=',true)
+        with('brand', 'category', 'images')
+            ->where('is_seasonal', '=', true)
             ->get();
 
-        $image = SlidersAndBanners::where('type',  SlidersAndBanners::SEASONAL)->get();
+        $image = SlidersAndBanners::where('type', SlidersAndBanners::SEASONAL)->get();
         if ($image->isEmpty()) {
             return response()->json([
                 'banner' => '',
