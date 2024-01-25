@@ -49,9 +49,10 @@ Route::middleware('checkRole:admin|consultant')->group(function () {
     Route::group(['as' => 'orders.'], function () {
         Route::get('orders', [\App\Http\Controllers\OrderController::class, 'index'])->name('index');
         Route::get('orders/show/{orderCode}', [\App\Http\Controllers\OrderController::class, 'show'])->name('show');
-        Route::post('/orders/accept/{orderCode}', [\App\Http\Controllers\OrderController::class, 'acceptOrder'])->name('acceptOrder');
-        Route::post('/orders/complete/{orderCode}', [\App\Http\Controllers\OrderController::class, 'complete'])->name('completeOrder');
-        Route::post('/orders/reject/{orderCode}', [\App\Http\Controllers\OrderController::class, 'rejectOrder'])->name('rejectOrder');
+        Route::post('orders/accept/{orderCode}', [\App\Http\Controllers\OrderController::class, 'acceptOrder'])->name('acceptOrder');
+        Route::post('orders/complete/{orderCode}', [\App\Http\Controllers\OrderController::class, 'complete'])->name('completeOrder');
+        Route::post('orders/reject/{orderCode}', [\App\Http\Controllers\OrderController::class, 'rejectOrder'])->name('rejectOrder');
+        Route::get('orders/goods_to_order', [\App\Http\Controllers\OrderController::class, 'goods_to_order'])->name('goods_to_order');
     });
 
     Route::group(['as' => 'change_password.'], function () {

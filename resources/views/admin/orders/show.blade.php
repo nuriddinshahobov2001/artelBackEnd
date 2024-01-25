@@ -3,7 +3,7 @@
 @section('content')
     <section>
         <div>
-            <a href="{{ route('orders.index') }}" class="btn btn-outline-danger">Назад</a>
+            <a onclick="history.back()" class="btn btn-outline-danger">Назад</a>
             @if($goods[0]->status_id == 1)
                 <a href="#" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#acceptOrder">Завершить</a>
             @endif

@@ -34,7 +34,7 @@ class OrderRequest extends FormRequest
             'address' => '',
             'delivery' => '',
             'total_sum' => '',
-            'toOrder' => 'bool'
+            'toOrder' => 'required|boolean'
         ];
     }
 

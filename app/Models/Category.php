@@ -10,4 +10,9 @@ class Category extends Model
     use HasFactory;
 
     protected $guarded = false;
+
+    public function good()
+    {
+        return $this->hasMany(Good::class, 'category_id', 'category_id');
+    }
 }

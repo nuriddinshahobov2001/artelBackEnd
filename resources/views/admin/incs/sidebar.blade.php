@@ -2,7 +2,7 @@
     <div class="sidebar-header position-relative">
         <div class="d-flex justify-content-between align-items-center">
             <div class="logo">
-                <a href="#"><img src="{{asset('assets/images/logo/logo.svg')}}" alt="Logo" srcset=""></a>
+                RIZO
             </div>
             <div class="theme-toggle d-flex gap-2  align-items-center mt-2">
                 <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" class="iconify iconify--system-uicons" width="20" height="20" preserveAspectRatio="xMidYMid meet" viewBox="0 0 21 21"><g fill="none" fill-rule="evenodd" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M10.5 14.5c2.219 0 4-1.763 4-3.982a4.003 4.003 0 0 0-4-4.018c-2.219 0-4 1.781-4 4c0 2.219 1.781 4 4 4zM4.136 4.136L5.55 5.55m9.9 9.9l1.414 1.414M1.5 10.5h2m14 0h2M4.135 16.863L5.55 15.45m9.899-9.9l1.414-1.415M10.5 19.5v-2m0-14v-2" opacity=".3"></path><g transform="translate(-210 -1)"><path d="M220.5 2.5v2m6.5.5l-1.5 1.5"></path><circle cx="220.5" cy="11.5" r="4"></circle><path d="m214 5l1.5 1.5m5 14v-2m6.5-.5l-1.5-1.5M214 18l1.5-1.5m-4-5h2m14 0h2"></path></g></g></svg>
@@ -59,34 +59,40 @@
                 </a>
             </li>
             <li
-                class="sidebar-item {{ (request()->is('orders') or request()->is('orders/*')) ? 'active' : '' }}">
-                <a href="{{ route('orders.index') }}" class='sidebar-link'>
-                    <i class="bi bi-grid-fill"></i>
-                    <span>Заказы</span>
-                </a>
-            </li>
-            <li
                 class="sidebar-item {{ (request()->is('goodsWithDefects') or request()->is('goodsWithDefects/*')) ? 'active' : '' }}">
                 <a href="{{ route('goodsWithDefects') }}" class='sidebar-link'>
                     <i class="bi bi-grid-fill"></i>
                     <span>Товари с недостатками</span>
                 </a>
             </li>
-            <li class="sidebar-item has-sub">
+            <li class="sidebar-item has-sub {{ (request()->is('orders') or request()->is('orders/*')) ? 'active' : '' }}">
+                <a href="#" class="sidebar-link">
+                    <span>Заказы</span>
+                </a>
+                <ul class="submenu {{ (request()->is('orders') or request()->is('orders/*')) ? 'active' : '' }}">
+                    <li class="submenu-item {{ request()->is('orders') ? 'active' : '' }}">
+                        <a href="{{ route('orders.index') }}">Заказы</a>
+                    </li>
+                    <li class="submenu-item {{ request()->is('orders/goods_to_order') ? 'active' : '' }}">
+                        <a href="{{ route('orders.goods_to_order') }}">Товары под заказ</a>
+                    </li>
+                </ul>
+            </li>
+            <li class="sidebar-item has-sub {{ (request()->is('sliders_and_banners') or request()->is('sliders_and_banners/*')) ? 'active' : '' }}">
                 <a href="#" class="sidebar-link">
                     <span>Слайдеры и баннеры</span>
                 </a>
-                <ul class="submenu ">
-                    <li class="submenu-item  ">
+                <ul class="submenu {{ (request()->is('sliders_and_banners') or request()->is('sliders_and_banners/*')) ? 'active' : '' }}">
+                    <li class="submenu-item {{ request()->is('sliders_and_banners/sliders') ? 'active' : '' }} ">
                         <a href="{{ route('sliders_and_banners.sliders') }}">Сдайдеры</a>
                     </li>
-                    <li class="submenu-item  ">
+                    <li class="submenu-item {{ request()->is('sliders_and_banners/banner') ? 'active' : '' }} ">
                         <a href="{{ route('sliders_and_banners.banner') }}">Баннеры</a>
                     </li>
-                    <li class="submenu-item  ">
+                    <li class="submenu-item {{ request()->is('sliders_and_banners/footer') ? 'active' : '' }}  ">
                         <a href="{{ route('sliders_and_banners.footer') }}">Футеры</a>
                     </li>
-                    <li class="submenu-item  ">
+                    <li class="submenu-item {{ request()->is('sliders_and_banners/category_page') ? 'active' : '' }}  ">
                         <a href="{{ route('sliders_and_banners.category_page') }}">Страница категории</a>
                     </li>
                 </ul>

@@ -30,6 +30,13 @@ class OrderController extends Controller
         return view('admin.orders.show', compact('goods'));
     }
 
+    public function goods_to_order()
+    {
+        $orders = $this->orderService->goods_to_order();
+
+        return view('admin.orders.goods_to_order', compact('orders'));
+    }
+
     public function acceptOrder($orderCode)
     {
         $res = $this->orderService->acceptOrder($orderCode);
